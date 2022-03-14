@@ -7,18 +7,22 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Random;
 import java.util.Set;
+import java.util.Stack;
 
 import org.json.JSONException;
 
 import com.anylogic.engine.gui.ExperimentHost;
 import com.anylogic.engine.gui.IExperimentHost;
 
+import simplifiedSimulator.Container;
 import simplifiedSimulator.CustomExperiment;
+import simplifiedSimulator.Observation;
 import simplifiedSimulator.QueyCrane;
 import simplifiedSimulator.Result;
 import simplifiedSimulator.Simulation;
 import simplifiedSimulator.State;
 import simplifiedSimulator.Task;
+import simplifiedSimulator.TwoDPoint;
 
 public class Env {
 
@@ -134,18 +138,23 @@ public class Env {
 		return action;
 	}
 
-	public int getAction(Object state, int old_stack, boolean fixRandom, Random R) throws JSONException, IOException {
+	public int getAction(Object state, Observation observation, boolean fixRandom, Random R)
+			throws JSONException, IOException {
 
 		State info = (State) state;
 
 		if (info.portNum == 0) {
 			int action = new Random().nextInt(6);
 			while (true) {
-				if (action != old_stack) {
+				Stack<Container> pile = (observation.block.get(new TwoDPoint(observation.bay, action))).containerPiles
+						.get(0);
+
+				if (action != observation.stack && (pile.size() < 6 + 1)) {
 					return action;
 				} else {
 					action = new Random().nextInt(6);
 				}
+
 			}
 		}
 
@@ -156,9 +165,8 @@ public class Env {
 		if (isDone) {
 			reward = getFinalReward(info.queyCranes);
 		}
-		// System.out.println("Env Port: "+portNum+" Communicator Type:
-		// "+com.get(portNum).type);
-		com.get(portNum).sendEnvInfo(info, reward);
+
+		com.get(portNum).sendEnvInfo(info, observation, reward);
 		int action;
 		if (!isDone) {
 			action = com.get(portNum).getAction();

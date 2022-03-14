@@ -10523,33 +10523,25 @@ y.relocationAmount++;
 							<Value Class="CodeValue">
 								<Code><![CDATA[Yard y = (Yard)agent2source(agent);
 // y.showBlockConfiguration();
-System.out.println("yard matrix: ");
+System.out.println("relocating====");
 
-y.getContainersMatrix();
+
 
 int newStack;
 
-if (state.portNum != 0)
+try
 {
-    newStack = 3;
+    Observation observation = new Observation(agent);        
+    newStack = env.getAction(state,observation, fixRandom, R);
+    
 }
-else
+catch (IOException | JSONException e)
 {
-    try
-    {
-        Observation observation = new Observation(agent);
-        //newStack = env.getStack(state, fixRandom, R);
-        
-        newStack = env.getAction(state,observation, fixRandom, R);
-        
-    }
-    catch (IOException | JSONException e)
-    {
-        e.printStackTrace();
-        newStack = -1;
-        System.exit(-1);
-    }
+    e.printStackTrace();
+    newStack = -1;
+    System.exit(-1);
 }
+
 
 //relocationTime += 1;
 
@@ -80079,18 +80071,18 @@ public
             int newStack;
             while (true)
             {
-            	System.out.println("loop");
+            	//System.out.println("loop");
                 // int temp = fixRandom ? R.nextInt(this.stackAmount) : new Random().nextInt(this.stackAmount);
                 // int temp=env.getStack();
                 int temp = n;
                 // int temp = env.getRandomAction(state, fixRandom, R);
                 Stack<Container> pile = (block.get(new TwoDPoint(c.bay, temp))).containerPiles.get(0);
 
-                System.out.println("layer limit is "+this.layerLimit);
+                //System.out.println("layer limit is "+this.layerLimit);
                 if ((temp != c.stack) && (pile.size() < this.layerLimit + 1))
                 {
                     newStack = temp;
-                    System.out.println("break!!");
+                    //System.out.println("break!!");
                     break;
                 }
             }
@@ -82096,7 +82088,7 @@ public class Observation implements Serializable {
 		}else {
 			isSmallContainer=true;
 		}
-		System.out.println("hello");
+		//System.out.println("hello");
 		if (task.source instanceof Yard){
 			Yard source2yard=(Yard)task.source;
 			if(source2yard.index==yard.index) {

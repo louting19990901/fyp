@@ -91,6 +91,8 @@ class Env():
         info = json.loads(str(self.client.recv(1024), encoding="GBK"))
 
         # -----------state-----------
+        bay = info.get("bay")
+        stack = info.get("stack")
         containersMatrix = info.get("containersMatrix")
         headingTrucksNumber = info.get("headingTrucksNumber")
         queuingTrucksNumber = info.get("queuingTrucksNumber")
@@ -99,9 +101,21 @@ class Env():
 
         state = self.generate_feature_vector_and_action_space(
             [containersMatrix, headingTrucksNumber, queuingTrucksNumber, headingContainers, queuingContainers])
-        print("state0: ",state)
         reward = info.get('reward')
         is_done = info.get('isDone')
+
+        print("reset****")
+        print("state0: ",state)
+        print("bay: ", type(bay), " : ", bay)
+        print("stack: ", type(stack), " : ", stack)
+        print("containerMatrix: ",type(containersMatrix)," : ",containersMatrix)
+        print("headingTrucksNumber: ", type(headingTrucksNumber), " : ", headingTrucksNumber)
+        print("queuingTrucksNumber: ", type(queuingTrucksNumber), " : ", queuingTrucksNumber)
+        print("headingContainers: ", type(headingContainers), " : ", headingContainers)
+        print("queuingContainers: ", type(queuingContainers), " : ", queuingContainers)
+        print("reward: ", type(reward), " : ", reward)
+        print("is_done: ", type(is_done), " : ", is_done)
+
 
         return state
 
@@ -112,24 +126,10 @@ class Env():
     def step(self, action:int):
 
         self.client.send(str(action).encode('GBK'))
-        #print(self.env_type, 'client sent action to port', self.port)
-
         info = json.loads(str(self.client.recv(1024), encoding="GBK"))
 
-        # -----------state-----------
-        # truckToQCDistance = info.get('truckToQCDistance')
-        # # print("truckToQCDistance: ", truckToQCDistance)
-        #
-        # qcRemainTaskAmount = info.get('qcRemainTaskAmount')
-        # # print("qcRemainTaskAmount: ", qcRemainTaskAmount)
-        #
-        # qcTruckQueueLength = info.get('qcTruckQueueLength')
-        # currentWorkingTruckAmount = info.get('currentWorkingTruckAmount')
-        # #operationTimes = info.get('taskOperationTimes')
-        # shipAmount = info.get('shipAmount')
-        # headingToQCAmount = info.get('headingToQCAmount')
-        # qcTypes = info.get('qcTypes')
-
+        bay=info.get("bay")
+        stack=info.get("stack")
         containersMatrix=info.get("containersMatrix")
         headingTrucksNumber=info.get("headingTrucksNumber")
         queuingTrucksNumber=info.get("queuingTrucksNumber")
@@ -137,9 +137,21 @@ class Env():
         queuingContainers=info.get("queuingContainers")
 
         state = self.generate_feature_vector_and_action_space([containersMatrix,headingTrucksNumber,queuingTrucksNumber,headingContainers,queuingContainers])
-        print("state1: ", state)
+
         reward = info.get('reward')
         is_done = info.get('isDone')
+        print("state1: ", state)
+        print("step****")
+        print("state0: ", state)
+        print("bay: ", type(bay), " : ", bay)
+        print("stack: ", type(stack), " : ", stack)
+        print("containerMatrix: ", type(containersMatrix), " : ", containersMatrix)
+        print("headingTrucksNumber: ", type(headingTrucksNumber), " : ", headingTrucksNumber)
+        print("queuingTrucksNumber: ", type(queuingTrucksNumber), " : ", queuingTrucksNumber)
+        print("headingContainers: ", type(headingContainers), " : ", headingContainers)
+        print("queuingContainers: ", type(queuingContainers), " : ", queuingContainers)
+        print("reward: ", type(reward), " : ", reward)
+        print("is_done: ", type(is_done), " : ", is_done)
         return state, reward, is_done
 
     def generate_feature_vector_and_action_space(self, state):
@@ -169,8 +181,12 @@ class Env():
     def test_port(self):
         self.executor.test()
 
-def RLGetAction(self,state):
-    print("RL get action...")
+    def RLGetAction(self,state):
+        #print("RL get action...")
+        act = random.randint(0, 6)
+        while(True):
+            if(act!=state.)
+
 
 def play(env):
     s = env.reset()
@@ -178,8 +194,8 @@ def play(env):
     while(True):
 
         # ------ select action from model here ------
-        act = random.randint(0, 6)
-        #act=RLGetAction(s)
+        #act = random.randint(0, 6)
+        act=RLGetAction(s)
         s_, r, done = env.step(act)
         total_r += r
         s = s_
@@ -187,6 +203,10 @@ def play(env):
             env.receive_end_info()
             break
     return total_r
+
+class Observation:
+    # todo
+    pass
 
 
 if __name__ == "__main__":
