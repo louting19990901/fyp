@@ -885,6 +885,9 @@ startTimeInModel = time();
 					<ShowLabel>true</ShowLabel>
 					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
 						<Type><![CDATA[int]]></Type>        
+						<InitialValue Class="CodeValue">
+							<Code><![CDATA[0]]></Code>
+						</InitialValue>
 					</Properties>
 				</Variable>
 				<Variable Class="CollectionVariable">
@@ -4506,17 +4509,9 @@ int actionByAI;
 if (usePRTT){
 	actionByAI = PRTT(truck)[0];
 } else {
-	if(state.portNum == 0){
+	
 		actionByAI = env.getRandomAction(state, fixRandom, R);
-	}else{
-		try{
-			actionByAI = env.getAction(state, fixRandom,  R);
-		} catch (IOException | JSONException e) {
-			e.printStackTrace();
-			actionByAI = -1;
-			System.exit(-1);
-		} 
-	}
+
 }
 
 
@@ -5557,6 +5552,7 @@ if (truckExitAmount == trucks.size()){
 	state.isDone = true;
 	try{
 		env.getAction(state, fixRandom,  R);
+		//env.endEpisode();
 	} catch (IOException | JSONException e) {
 		e.printStackTrace();
 		System.exit(-1);

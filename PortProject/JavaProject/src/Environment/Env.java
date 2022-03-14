@@ -165,9 +165,8 @@ public class Env {
 		if (isDone) {
 			reward = getFinalReward(info.queyCranes);
 		}
-		// System.out.println("Env Port: "+portNum+" Communicator Type:
-		// "+com.get(portNum).type);
-		com.get(portNum).sendEnvInfo(info, reward);
+
+		com.get(portNum).sendEnvInfo(info, observation, reward);
 		int action;
 		if (!isDone) {
 			action = com.get(portNum).getAction();

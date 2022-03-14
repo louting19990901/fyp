@@ -91,22 +91,15 @@ class Env():
         info = json.loads(str(self.client.recv(1024), encoding="GBK"))
 
         # -----------state-----------
-        truckToQCDistance = info.get('truckToQCDistance')
-        qcRemainTaskAmount = info.get('qcRemainTaskAmount')
-        qcTruckQueueLength = info.get('qcTruckQueueLength')
-        currentWorkingTruckAmount = info.get('currentWorkingTruckAmount')
-        shipAmount = info.get('shipAmount')
-        headingToQCAmount = info.get('headingToQCAmount')
-        qcTypes = info.get('qcTypes')
+        containersMatrix = info.get("containersMatrix")
+        headingTrucksNumber = info.get("headingTrucksNumber")
+        queuingTrucksNumber = info.get("queuingTrucksNumber")
+        headingContainers = info.get("headingContainers")
+        queuingContainers = info.get("queuingContainers")
 
-        #state = self.generate_feature_vector([truckToQCDistance, qcRemainTaskAmount, qcTruckQueueLength, currentWorkingTruckAmount])
-        state = self.generate_feature_vector_and_action_space([truckToQCDistance,
-                                                                           qcRemainTaskAmount,
-                                                                           qcTruckQueueLength,
-                                                                           currentWorkingTruckAmount,
-                                                                           headingToQCAmount,
-                                                                           qcTypes])
-
+        state = self.generate_feature_vector_and_action_space(
+            [containersMatrix, headingTrucksNumber, queuingTrucksNumber, headingContainers, queuingContainers])
+        print("state0: ",state)
         reward = info.get('reward')
         is_done = info.get('isDone')
 
@@ -124,26 +117,27 @@ class Env():
         info = json.loads(str(self.client.recv(1024), encoding="GBK"))
 
         # -----------state-----------
-        truckToQCDistance = info.get('truckToQCDistance')
-        # print("truckToQCDistance: ", truckToQCDistance)
+        # truckToQCDistance = info.get('truckToQCDistance')
+        # # print("truckToQCDistance: ", truckToQCDistance)
+        #
+        # qcRemainTaskAmount = info.get('qcRemainTaskAmount')
+        # # print("qcRemainTaskAmount: ", qcRemainTaskAmount)
+        #
+        # qcTruckQueueLength = info.get('qcTruckQueueLength')
+        # currentWorkingTruckAmount = info.get('currentWorkingTruckAmount')
+        # #operationTimes = info.get('taskOperationTimes')
+        # shipAmount = info.get('shipAmount')
+        # headingToQCAmount = info.get('headingToQCAmount')
+        # qcTypes = info.get('qcTypes')
 
-        qcRemainTaskAmount = info.get('qcRemainTaskAmount')
-        # print("qcRemainTaskAmount: ", qcRemainTaskAmount)
+        containersMatrix=info.get("containersMatrix")
+        headingTrucksNumber=info.get("headingTrucksNumber")
+        queuingTrucksNumber=info.get("queuingTrucksNumber")
+        headingContainers=info.get("headingContainers")
+        queuingContainers=info.get("queuingContainers")
 
-        qcTruckQueueLength = info.get('qcTruckQueueLength')
-        currentWorkingTruckAmount = info.get('currentWorkingTruckAmount')
-        #operationTimes = info.get('taskOperationTimes')
-        shipAmount = info.get('shipAmount')
-        headingToQCAmount = info.get('headingToQCAmount')
-        qcTypes = info.get('qcTypes')
-        #state = self.generate_feature_vector([truckToQCDistance, qcRemainTaskAmount, qcTruckQueueLength, currentWorkingTruckAmount])
-        state = self.generate_feature_vector_and_action_space([truckToQCDistance,
-                                                                           qcRemainTaskAmount,
-                                                                           qcTruckQueueLength,
-                                                                           currentWorkingTruckAmount,
-                                                                           headingToQCAmount,
-                                                                           qcTypes])
-
+        state = self.generate_feature_vector_and_action_space([containersMatrix,headingTrucksNumber,queuingTrucksNumber,headingContainers,queuingContainers])
+        print("state1: ", state)
         reward = info.get('reward')
         is_done = info.get('isDone')
         return state, reward, is_done
@@ -175,6 +169,8 @@ class Env():
     def test_port(self):
         self.executor.test()
 
+def RLGetAction(self,state):
+    print("RL get action...")
 
 def play(env):
     s = env.reset()
@@ -182,8 +178,8 @@ def play(env):
     while(True):
 
         # ------ select action from model here ------
-        act = random.randint(0, 15)
-
+        act = random.randint(0, 6)
+        #act=RLGetAction(s)
         s_, r, done = env.step(act)
         total_r += r
         s = s_
