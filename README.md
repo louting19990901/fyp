@@ -69,9 +69,9 @@
 
 - [x] 找到为什么只有双箱需要翻箱
 
-- [ ] 在python端读取数据
+- [x] 在python端读取数据
 
-- [ ] 实现python函数RLGetAction
+- [x] 实现python函数RLGetAction
 
 - [ ] 存储(state,reward)
 
@@ -103,6 +103,14 @@
 - debug  python 环境没有运行中断
 
 
+
+- sparse reward 问题如何解决
+- 与其类似的围棋问题
+- 但是与机械手臂栓螺丝问题不同，该问题一开始的时候由于参数是随机初始化的，几乎不可能拴好，因此基本无法出现positive的reward
+- 解决方法：定义额外reward，也叫reward shaping
+- 在yard的情境下，由于在一个episode中任务数量是不变的，因此一下参数可以作为reward shaping的额外reward
+  - reshuffleNumber/taskNumber
+- 给机器加上好奇心：碰到新事物可以增加reward
 
 
 

@@ -12,7 +12,6 @@ import org.json.JSONObject;
 
 import simplifiedSimulator.Observation;
 import simplifiedSimulator.State;
-import simplifiedSimulator.Task;
 
 public class Communicator {
 
@@ -113,13 +112,13 @@ public class Communicator {
 	public void sendEndInfo(State state) throws JSONException {
 
 		JSONObject json = new JSONObject();
-		for (int i = 0; i < state.shipAmount * 4; i++) {
-			String text = " ";
-			for (Task t : state.queyCranes.get(i).completedTaskList) {
-				text += df.format(t.waitTime) + " ";
-			}
-			json.put(String.valueOf(i), text.trim());
-		}
+//		for (int i = 0; i < state.shipAmount * 4; i++) {
+//			String text = " ";
+//			for (Task t : state.queyCranes.get(i).completedTaskList) {
+//				text += df.format(t.waitTime) + " ";
+//			}
+//			json.put(String.valueOf(i), text.trim());
+//		}
 		out.println(json.toString()); // send to client
 		// System.out.println(json.toString());
 

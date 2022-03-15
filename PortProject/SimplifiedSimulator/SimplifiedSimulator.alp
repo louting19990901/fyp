@@ -10528,10 +10528,12 @@ System.out.println("relocating====");
 
 
 int newStack;
-
+relocationTime += 1;
 try
 {
-    Observation observation = new Observation(agent);        
+    Observation observation = new Observation(agent,relocationTime,taskIndex);    
+    
+        
     newStack = env.getAction(state,observation, fixRandom, R);
     
 }
@@ -10543,7 +10545,7 @@ catch (IOException | JSONException e)
 }
 
 
-//relocationTime += 1;
+
 
 Container top = y.relocate(agent, newStack);
 /*
@@ -81759,7 +81761,7 @@ public class State implements Serializable {
 	double[] truckToTargetQCDistance; 
 	int yardQueueLength;
 	int headingToYardAmount; // truck that is coming to this yard amount, not include the trucks in the queue
- 	
+
 	
 	public State(ArrayList<Truck> trucks, ArrayList<QueyCrane> queyCranes, ArrayList<Double> taskOperationTimes, int[][] matrix, int shipAmount) {
 		this.trucks = trucks;
@@ -81798,6 +81800,7 @@ public class State implements Serializable {
 		return truckCurrentPositionIndex;
 	}
 	
+
 	public void updateTruckDispatchingState(Truck t, Network net) {
 		int truckCurrentPositionIndex = getTruckCurrentPositionIndex(t);
 		
@@ -82047,11 +82050,13 @@ public class Observation implements Serializable {
 	public StringBuffer headingContainers; 
 	public StringBuffer queuingContainers;
 	public TreeMap<TwoDPoint, Pile> block; 
+ 	public int taskNumber;
+ 	public int relocationNumber;
 
     /**
      * Default constructor
      */
-    public Observation(Container c) {
+    public Observation(Container c, int relocationNumber,int taskNumber) {
     	this.yard= (Yard)c.currentLocation;
     	this.block=yard.block;
     	this.stack=c.stack;
@@ -82063,6 +82068,9 @@ public class Observation implements Serializable {
     	this.queuingTrucks=yard.queuingTrucks;
     	this.headingTrucksNumber=headingTrucks.size();
     	this.queuingTrucksNumber=queuingTrucks.size();
+    	this.taskNumber=taskNumber;
+		this.relocationNumber=relocationNumber;
+		System.out.println("taskNumber: "+taskNumber+";relocationNumber: "+relocationNumber);
     	
     	
     	headingContainers=new StringBuffer("");
@@ -82079,6 +82087,9 @@ public class Observation implements Serializable {
     	//System.out.println("queuingcontainers: "+queuingContainers);
     	
     }
+    
+	
+	
     
     private StringBuffer container2String(StringBuffer sb,Task task) {
     	boolean isSmallContainer;

@@ -160,17 +160,15 @@ class Env():
 
     def receive_end_info(self):
         self.client.send(str(-1).encode('GBK'))  # send episode final info request
-        
+
         end_info = json.loads(str(self.client.recv(1024*10), encoding="GBK"))
         # ------------- end info --------------
-        wait_time = dict()
-        total_length = 0
-        for qc_index in range(self.qc_num):
-            times = end_info.get(str(qc_index)).split(' ')
-            wait_time[str(qc_index)] = times
-            total_length += len(times)
-
-        return wait_time
+        # wait_time = dict()
+        # total_length = 0
+        # for qc_index in range(self.qc_num):
+        #     times = end_info.get(str(qc_index)).split(' ')
+        #     wait_time[str(qc_index)] = times
+        #     total_length += len(times)
 
     def render(self, mode='human'):
         pass
