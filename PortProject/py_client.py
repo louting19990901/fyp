@@ -98,14 +98,14 @@ class Env():
         queuingTrucksNumber = info.get("queuingTrucksNumber")
         headingContainers = info.get("headingContainers")
         queuingContainers = info.get("queuingContainers")
+        s=Observation(bay,stack,containersMatrix,headingTrucksNumber,queuingTrucksNumber,headingContainers,queuingContainers)
 
-        state = self.generate_feature_vector_and_action_space(
-            [containersMatrix, headingTrucksNumber, queuingTrucksNumber, headingContainers, queuingContainers])
+        #state = self.generate_feature_vector_and_action_space([containersMatrix, headingTrucksNumber, queuingTrucksNumber, headingContainers, queuingContainers])
         reward = info.get('reward')
         is_done = info.get('isDone')
 
         print("reset****")
-        print("state0: ",state)
+        #print("state0: ",state)
         print("bay: ", type(bay), " : ", bay)
         print("stack: ", type(stack), " : ", stack)
         print("containerMatrix: ",type(containersMatrix)," : ",containersMatrix)
@@ -117,7 +117,7 @@ class Env():
         print("is_done: ", type(is_done), " : ", is_done)
 
 
-        return state
+        return s
 
     # def generate_feature_vector(self, feature_list):
     #     feature_vector = np.array(feature_list).T
@@ -135,14 +135,14 @@ class Env():
         queuingTrucksNumber=info.get("queuingTrucksNumber")
         headingContainers=info.get("headingContainers")
         queuingContainers=info.get("queuingContainers")
+        s_=Observation(bay,stack,containersMatrix,headingTrucksNumber,queuingTrucksNumber,headingContainers,queuingContainers)
 
-        state = self.generate_feature_vector_and_action_space([containersMatrix,headingTrucksNumber,queuingTrucksNumber,headingContainers,queuingContainers])
+
+        #state = self.generate_feature_vector_and_action_space([containersMatrix,headingTrucksNumber,queuingTrucksNumber,headingContainers,queuingContainers])
 
         reward = info.get('reward')
         is_done = info.get('isDone')
-        print("state1: ", state)
-        print("step****")
-        print("state0: ", state)
+        print("state0: ")
         print("bay: ", type(bay), " : ", bay)
         print("stack: ", type(stack), " : ", stack)
         print("containerMatrix: ", type(containersMatrix), " : ", containersMatrix)
@@ -152,7 +152,7 @@ class Env():
         print("queuingContainers: ", type(queuingContainers), " : ", queuingContainers)
         print("reward: ", type(reward), " : ", reward)
         print("is_done: ", type(is_done), " : ", is_done)
-        return state, reward, is_done
+        return s_, reward, is_done
 
     def generate_feature_vector_and_action_space(self, state):
         full_length_feature_vector = np.array(state).T
@@ -160,6 +160,7 @@ class Env():
 
     def receive_end_info(self):
         self.client.send(str(-1).encode('GBK'))  # send episode final info request
+        
         end_info = json.loads(str(self.client.recv(1024*10), encoding="GBK"))
         # ------------- end info --------------
         wait_time = dict()
@@ -181,11 +182,24 @@ class Env():
     def test_port(self):
         self.executor.test()
 
-    def RLGetAction(self,state):
-        #print("RL get action...")
-        act = random.randint(0, 6)
-        while(True):
-            if(act!=state.)
+def RLGetAction(observation):
+    #print("RL get action...")
+    act = random.randint(0, 5)
+
+    # while(True):
+    #     print("obs: ",observation.bay," ",act," shape")
+    #     for i in range(25):
+    #         for j in range(6):
+    #             print(observation.containersMatrix[i*6+j],end="")
+    #         print()
+
+        pileSize = int(observation.containersMatrix[observation.bay*6+act])
+        print(pileSize)
+        if(act != observation.stack) and (pileSize < 7):
+            return act
+        else:
+            act=random.randint(0, 5)
+
 
 
 def play(env):
@@ -205,8 +219,23 @@ def play(env):
     return total_r
 
 class Observation:
-    # todo
-    pass
+    bay = -1
+    stack=-1
+    containersMatrix=""
+    headingTrucksNumber=-1
+    queuingTrucksNumber=-1
+    headingContainers=""
+    queuingContianers=""
+
+
+    def __init__(self,bay,stack,containersMatrix,headingTrucksNumber,queuingTrucksNumber,headingContainers,queuingContainers):
+        self.stack=stack
+        self.bay=bay
+        self.containersMatrix=containersMatrix
+        self.headingTrucksNumber=headingTrucksNumber
+        self.queuingTrucksNumber=queuingTrucksNumber
+        self.headingContainers=headingContainers
+        self.queuingContianers=queuingContainers
 
 
 if __name__ == "__main__":
