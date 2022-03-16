@@ -93,6 +93,14 @@
 
 - [x] 在send_end_info.java中加入observation
 
+- [ ] 合并pythonclient端代码与模范DQN代码
+
+- [x] 将observation转化为numpy
+
+- [ ] chooseAction  修改
+
+- [x] dbeug:reward null:其实是因为没有处理好idDone=true的情况下传回来的参数
+
   
 
 
