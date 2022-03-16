@@ -97,9 +97,11 @@
 
 - [x] 将observation转化为numpy
 
-- [ ] chooseAction  修改
+- [x] chooseAction  修改
 
 - [x] dbeug:reward null:其实是因为没有处理好idDone=true的情况下传回来的参数
+
+- [x] 修改store_transition
 
   
 
