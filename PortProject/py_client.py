@@ -5,7 +5,9 @@ import json
 import random
 import time
 import numpy as np
-# import torch
+import torch
+import torch.nn as nn
+import gym
 
 
 class Env():
@@ -127,6 +129,16 @@ class Env():
     #     feature_vector = np.array(feature_list).T
     #     return feature_vector
 
+    def regulateStrings(self,str):
+        if len(str)==0:
+            str="0000000000"
+        elif len(str)==5:
+            str=str+"00000"
+        else:
+            str=str[0:10]
+        return str
+
+
     def step(self, action:int):
 
         self.client.send(str(action).encode('GBK'))
@@ -153,8 +165,11 @@ class Env():
         #     print("containerMatrix: ", type(containersMatrix), " : ", containersMatrix)
         #     print("headingTrucksNumber: ", type(headingTrucksNumber), " : ", headingTrucksNumber)
         #     print("queuingTrucksNumber: ", type(queuingTrucksNumber), " : ", queuingTrucksNumber)
-        #     print("headingContainers: ", type(headingContainers), " : ", headingContainers)
-        #     print("queuingContainers: ", type(queuingContainers), " : ", queuingContainers)
+            headingContainers=self.regulateStrings(headingContainers);
+            queuingContainers=self.regulateStrings(queuingContainers)
+
+            print("headingContainers: ", type(headingContainers), " : ", headingContainers)
+            print("queuingContainers: ", type(queuingContainers), " : ", queuingContainers)
             print("relocationNumber: ",relocationNumber," taskNumber: ",taskNumber," relocationNumber/taskNumber: ",float(relocationNumber)/float(taskNumber))
         #     print("reward: ", type(reward), " : ", reward)
         #     print("is_done: ", type(is_done), " : ", is_done)
@@ -196,30 +211,16 @@ def RLGetAction(observation):
 
 
 
-def play(env):
-    s = env.reset()
-    total_r = 0
-    while(True):
 
-        # ------ select action from model here ------
-        #act = random.randint(0, 6)
-        act=RLGetAction(s)
-        s_, r, done = env.step(act)
-        total_r += r
-        s = s_
-        if done:
-            env.receive_end_info()
-            break
-    return total_r
 
 class Observation:
-    bay = -1
-    stack=-1
-    containersMatrix=""
-    headingTrucksNumber=-1
-    queuingTrucksNumber=-1
-    headingContainers=""
-    queuingContianers=""
+    bay = -1                    #1 bit
+    stack=-1                    #1 bit
+    containersMatrix=""         #本来是6*25 =》1*25
+    headingTrucksNumber=-1      #1 bit
+    queuingTrucksNumber=-1      #1 bit
+    headingContainers=""    #10 bit
+    queuingContianers=""    #10 bit
     relocationNumber=-1
     taskNumber=-1
 
@@ -235,9 +236,46 @@ class Observation:
         self.relocationNumber=relocationNumber
         self.taskNumber=taskNumber
 
+
+
+
+
+
+
+
+
+
+class MyNet(nn.Module):
+    def __init__(self):
+        super(MyNet, self).__init__()
+        self.fc = nn.Sequential(
+            nn.Linear(7, 24),
+            nn.ReLU(),
+            nn.Linear(24, 24),
+            nn.ReLU(),
+            nn.Linear(24, 6)
+        )
+        self.mls = nn.MSELoss()
+        self.opt = torch.optim.Adam(self.parameters(), lr=0.001)
+
+    def forward(self, inputs):
+        return self.fc(inputs)
+
 if __name__ == "__main__":
+
     env = Env(16, 10005, 'train')
-    for episode in range(10):
+    for episode in range(1000):
         print(" =====episode ",episode,"=====")
-        score = play(env)
-        # print('score ', score)
+        s = env.reset()
+
+        while (True):
+
+            # ------ select action from model here ------
+
+            act = RLGetAction(s)
+            s_, r, done = env.step(act)
+            # total_r += r
+            s = s_
+            if done:
+                env.receive_end_info()
+                break
