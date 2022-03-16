@@ -9,6 +9,7 @@ import torch
 import torch.nn as nn
 import gym
 import torch.nn.functional as F
+import math
 
 # Hyper Parameters
 BATCH_SIZE = 32
@@ -97,9 +98,16 @@ class Env():
         #headingContainers  10
         #queuingContainers  10
         #total 174
-        s=[obs.bay,obs.stack,obs.headingTrucksNumber,obs.queuingTrucksNumber]+[int(x) for x in obs.containersMatrix]+[int(x) for x in obs.headingContainers]+[int(x) for x in obs.queuingContainers]
-        s=np.array(s)
-        print("shape s: ",s.shape)
+
+        # s=[obs.bay,obs.stack,obs.headingTrucksNumber,obs.queuingTrucksNumber]+[int(x) for x in obs.containersMatrix]+[int(x) for x in obs.headingContainers]+[int(x) for x in obs.queuingContainers]
+        s1=[obs.bay,obs.stack,obs.headingTrucksNumber,obs.queuingTrucksNumber]
+        s2=[int(x) for x in obs.containersMatrix]
+        s3=[int(x) for x in obs.headingContainers]
+        s4=[int(x) for x in obs.queuingContainers]
+        print(len(s1)," ",len(s2)," ",len(s3)," ",len(s4))
+        s=s1+s2+s3+s4
+
+        print("shape s: ",len(s)," ; ",s)
         return s
 
 
@@ -118,6 +126,7 @@ class Env():
             #print('client connected')
 
         info = json.loads(str(self.client.recv(1024), encoding="GBK"))
+        print("8888")
 
         # -----------state-----------
         bay = info.get("bay")
@@ -129,11 +138,8 @@ class Env():
         queuingContainers = info.get("queuingContainers")
         taskNumber=info.get("taskNumber")
         relocationNumber=info.get("relocationNumber")
-
-        #state = self.generate_feature_vector_and_action_space([containersMatrix, headingTrucksNumber, queuingTrucksNumber, headingContainers, queuingContainers])
         reward = info.get('reward')
         is_done = info.get('isDone')
-
         # print("reset****")
         # print("bay: ", type(bay), " : ", bay)
         # print("stack: ", type(stack), " : ", stack)
@@ -142,15 +148,14 @@ class Env():
         # print("queuingTrucksNumber: ", type(queuingTrucksNumber), " : ", queuingTrucksNumber)
         # print("headingContainers: ", type(headingContainers), " : ", headingContainers)
         # print("queuingContainers: ", type(queuingContainers), " : ", queuingContainers)
-        if not is_done:
-            print("relocationNumber/taskNumber: ",float(relocationNumber)/float(taskNumber))
+
+        print("relocationNumber/taskNumber: ",float(relocationNumber)/float(taskNumber))
         # print("reward: ", type(reward), " : ", reward)
         # print("is_done: ", type(is_done), " : ", is_done)
+        headingContainers = self.regulateStrings(headingContainers)
+        queuingContainers = self.regulateStrings(queuingContainers)
         obs=Observation(bay,stack,containersMatrix,headingTrucksNumber,queuingTrucksNumber,headingContainers,queuingContainers)
-
         s=self.getState(obs)
-
-
         return s,obs
 
     # def generate_feature_vector(self, feature_list):
@@ -168,10 +173,11 @@ class Env():
 
 
     def step(self, action:int):
-
+        print("5555")
         self.client.send(str(action).encode('GBK'))
+        print("4444")
         info = json.loads(str(self.client.recv(1024), encoding="GBK"))
-
+        print("6666")
         bay=info.get("bay")
         stack=info.get("stack")
         containersMatrix=info.get("containersMatrix")
@@ -184,8 +190,6 @@ class Env():
 
         # reward = info.get('reward')
         is_done = info.get('isDone')
-
-
         if not is_done:
         #     print("state0: ")
         #     print("bay: ", type(bay), " : ", bay)
@@ -195,21 +199,19 @@ class Env():
         #     print("queuingTrucksNumber: ", type(queuingTrucksNumber), " : ", queuingTrucksNumber)
             # print("headingContainers: ", type(headingContainers), " : ", headingContainers)
             # print("queuingContainers: ", type(queuingContainers), " : ", queuingContainers)
-            headingContainers = self.regulateStrings(headingContainers);
+            headingContainers = self.regulateStrings(headingContainers)
             queuingContainers = self.regulateStrings(queuingContainers)
             print("relocationNumber: ",relocationNumber," taskNumber: ",taskNumber)
             print(" relocationNumber/taskNumber: ",float(relocationNumber)/float(taskNumber))
-            obs = Observation(bay, stack, containersMatrix, headingTrucksNumber, queuingTrucksNumber, headingContainers,queuingContainers)
-
         #     print("reward: ", type(reward), " : ", reward)
         #     print("is_done: ", type(is_done), " : ", is_done)
-        #reward=float(relocationNumber)/float(taskNumber)
+            reward=float(relocationNumber)/float(taskNumber)
+            obs = Observation(bay, stack, containersMatrix, headingTrucksNumber, queuingTrucksNumber, headingContainers,queuingContainers)
+            s_=self.getState(obs)
+            return s_, reward, is_done,obs
         else:
             return -1,-1,is_done,-1
-        reward=0
-        s_=self.getState(obs)
-        print("end")
-        return s_, reward, is_done,obs
+
 
     def generate_feature_vector_and_action_space(self, state):
         full_length_feature_vector = np.array(state).T
@@ -303,23 +305,36 @@ class DQN(object):
         self.optimizer = torch.optim.Adam(self.eval_net.parameters(), lr=LR)
         self.loss_func = nn.MSELoss()
 
-    def del_tensor_ele(self,arr,index):
-        arr1 = arr[0:index]
-        arr2 = arr[index+1:]
-        return torch.cat((arr1,arr2),dim=0)
+
+
+    def find_second_max(self,arr,index):
+        second_index=-1
+        second_max=-9999
+        print("index is ",index)
+        for i in range(6):
+            if(i!=index and arr[0][i]>second_max):
+                second_max=arr[0][i]
+                second_index=i
+        return second_index
 
     def choose_action(self, x):
-        x = torch.unsqueeze(torch.FloatTensor(x), 0)
+        s=np.array(x)
+        x=torch.Tensor(x)
+        x = torch.unsqueeze(x, 0)
         # input only one sample
         if np.random.uniform() < EPSILON:  # greedy
             actions_value = self.eval_net.forward(x)
-            action = torch.max(actions_value, 1)[1].data.numpy()
-
+            action = torch.max(actions_value, 1)[1].data.numpy()[0]
+            print(action)
             #check whether the action(stack) is available, otherwise, choose the second largest q value
-            pile=
-            if(action==s[1] or x[4+x[0]+action]>=7):
-                index_max=torch.max(actions_value,1)[0]
-                action=torch.max(self.del_tensor_ele(actions_value,index_max),1)[1].data.numpy()
+            if(action==s[1] or s[4+s[0]+action]>=7):
+                index_max=torch.max(actions_value,1)[1].data.numpy()[0]
+                print("action value : ",actions_value)
+                # arr=self.del_tensor_ele(actions_value, index_max)
+                action=self.find_second_max(actions_value,index_max)
+                # print("arr : ",arr)
+                # action=torch.max(arr,1)[1].data.numpy()[0]
+                print("selected action is ",action)
 
         else:  # random
             action = np.random.randint(0, N_ACTIONS)
@@ -364,20 +379,35 @@ class DQN(object):
 
 
 if __name__ == "__main__":
-
+    dqn = DQN()
     env = Env(16, 10005, 'train')
-    for episode in range(1000):
+    ep_r=0
+    for episode in range(5):
         print(" =====episode ",episode,"=====")
         s,obs = env.reset()
 
         while (True):
+            print("111")
+            a = dqn.choose_action(s)
+            print("2222")
+            # take action
+            s_, r, done, info = env.step(a)
+            # r=math.log(r)
+            r=-r
+            print("333")
+            dqn.store_transition(s, a, r, s_)
 
-            # ------ select action from model here ------
+            ep_r += r
+            print("7777")
+            if dqn.memory_counter > MEMORY_CAPACITY:
+                dqn.learn()
+                if done:
+                    print('Ep: ', episode,
+                          '| Ep_r: ', round(ep_r, 2))
 
-            act = RLGetAction(obs)
-            s_, r, done,obs = env.step(act)
-            # total_r += r
-            s = s_
             if done:
-                env.receive_end_info()
                 break
+            s = s_
+
+
+
