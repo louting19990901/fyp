@@ -30,7 +30,7 @@ public class Env {
 	public static String taskFileName = ".." + spliter + "Data" + spliter + "7Ships.txt";
 	public static String outTaskFileName = ".." + spliter + "Data" + spliter + "outContainer.txt";
 	public static int truckAmount = 80;
-	public static boolean ifShowInfo = true;
+	public static boolean ifShowInfo = false;
 	public static String truckDispatchPolicy = null; // ORDERED, PRTT, RANDOM,
 	public static String yardCraneSchedulePolicy = "FCFS"; // ORDERED, FCFS, GREEDY, RANDOM,
 	public static HashMap<Integer, Communicator> com = new HashMap<Integer, Communicator>(); // <port_number, socket>
@@ -97,7 +97,7 @@ public class Env {
 	public ArrayList<Integer> executedActions = new ArrayList<Integer>();
 
 	public int getAction(Object state, boolean fixRandom, Random R) throws JSONException, IOException {
-
+		// System.out.println("original getaction function is called");
 		State info = (State) state;
 
 		if (info.portNum == 0) {

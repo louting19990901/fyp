@@ -98,23 +98,27 @@ class Env():
         queuingTrucksNumber = info.get("queuingTrucksNumber")
         headingContainers = info.get("headingContainers")
         queuingContainers = info.get("queuingContainers")
-        s=Observation(bay,stack,containersMatrix,headingTrucksNumber,queuingTrucksNumber,headingContainers,queuingContainers)
+        taskNumber=info.get("taskNumber")
+        relocationNumber=info.get("relocationNumber")
+        s=Observation(bay,stack,containersMatrix,headingTrucksNumber,queuingTrucksNumber,headingContainers,queuingContainers,relocationNumber,taskNumber)
 
         #state = self.generate_feature_vector_and_action_space([containersMatrix, headingTrucksNumber, queuingTrucksNumber, headingContainers, queuingContainers])
         reward = info.get('reward')
         is_done = info.get('isDone')
 
-        print("reset****")
-        #print("state0: ",state)
-        print("bay: ", type(bay), " : ", bay)
-        print("stack: ", type(stack), " : ", stack)
-        print("containerMatrix: ",type(containersMatrix)," : ",containersMatrix)
-        print("headingTrucksNumber: ", type(headingTrucksNumber), " : ", headingTrucksNumber)
-        print("queuingTrucksNumber: ", type(queuingTrucksNumber), " : ", queuingTrucksNumber)
-        print("headingContainers: ", type(headingContainers), " : ", headingContainers)
-        print("queuingContainers: ", type(queuingContainers), " : ", queuingContainers)
-        print("reward: ", type(reward), " : ", reward)
-        print("is_done: ", type(is_done), " : ", is_done)
+        # print("reset****")
+        # print("bay: ", type(bay), " : ", bay)
+        # print("stack: ", type(stack), " : ", stack)
+        # print("containerMatrix: ",type(containersMatrix)," : ",containersMatrix)
+        # print("headingTrucksNumber: ", type(headingTrucksNumber), " : ", headingTrucksNumber)
+        # print("queuingTrucksNumber: ", type(queuingTrucksNumber), " : ", queuingTrucksNumber)
+        # print("headingContainers: ", type(headingContainers), " : ", headingContainers)
+        # print("queuingContainers: ", type(queuingContainers), " : ", queuingContainers)
+        if not is_done:
+            print("relocationNumber/taskNumber: ",float(relocationNumber)/float(taskNumber))
+        # print("reward: ", type(reward), " : ", reward)
+        # print("is_done: ", type(is_done), " : ", is_done)
+
 
 
         return s
@@ -135,23 +139,27 @@ class Env():
         queuingTrucksNumber=info.get("queuingTrucksNumber")
         headingContainers=info.get("headingContainers")
         queuingContainers=info.get("queuingContainers")
-        s_=Observation(bay,stack,containersMatrix,headingTrucksNumber,queuingTrucksNumber,headingContainers,queuingContainers)
-
-
-        #state = self.generate_feature_vector_and_action_space([containersMatrix,headingTrucksNumber,queuingTrucksNumber,headingContainers,queuingContainers])
+        taskNumber = info.get("taskNumber")
+        relocationNumber = info.get("relocationNumber")
+        s_ = Observation(bay, stack, containersMatrix, headingTrucksNumber, queuingTrucksNumber, headingContainers,queuingContainers, relocationNumber, taskNumber)
 
         reward = info.get('reward')
         is_done = info.get('isDone')
-        print("state0: ")
-        print("bay: ", type(bay), " : ", bay)
-        print("stack: ", type(stack), " : ", stack)
-        print("containerMatrix: ", type(containersMatrix), " : ", containersMatrix)
-        print("headingTrucksNumber: ", type(headingTrucksNumber), " : ", headingTrucksNumber)
-        print("queuingTrucksNumber: ", type(queuingTrucksNumber), " : ", queuingTrucksNumber)
-        print("headingContainers: ", type(headingContainers), " : ", headingContainers)
-        print("queuingContainers: ", type(queuingContainers), " : ", queuingContainers)
-        print("reward: ", type(reward), " : ", reward)
-        print("is_done: ", type(is_done), " : ", is_done)
+
+        if not is_done:
+        #     print("state0: ")
+        #     print("bay: ", type(bay), " : ", bay)
+        #     print("stack: ", type(stack), " : ", stack)
+        #     print("containerMatrix: ", type(containersMatrix), " : ", containersMatrix)
+        #     print("headingTrucksNumber: ", type(headingTrucksNumber), " : ", headingTrucksNumber)
+        #     print("queuingTrucksNumber: ", type(queuingTrucksNumber), " : ", queuingTrucksNumber)
+        #     print("headingContainers: ", type(headingContainers), " : ", headingContainers)
+        #     print("queuingContainers: ", type(queuingContainers), " : ", queuingContainers)
+            print("relocationNumber: ",relocationNumber," taskNumber: ",taskNumber," relocationNumber/taskNumber: ",float(relocationNumber)/float(taskNumber))
+        #     print("reward: ", type(reward), " : ", reward)
+        #     print("is_done: ", type(is_done), " : ", is_done)
+
+
         return s_, reward, is_done
 
     def generate_feature_vector_and_action_space(self, state):
@@ -160,15 +168,9 @@ class Env():
 
     def receive_end_info(self):
         self.client.send(str(-1).encode('GBK'))  # send episode final info request
-
         end_info = json.loads(str(self.client.recv(1024*10), encoding="GBK"))
-        # ------------- end info --------------
-        # wait_time = dict()
-        # total_length = 0
-        # for qc_index in range(self.qc_num):
-        #     times = end_info.get(str(qc_index)).split(' ')
-        #     wait_time[str(qc_index)] = times
-        #     total_length += len(times)
+
+
 
     def render(self, mode='human'):
         pass
@@ -218,9 +220,11 @@ class Observation:
     queuingTrucksNumber=-1
     headingContainers=""
     queuingContianers=""
+    relocationNumber=-1
+    taskNumber=-1
 
 
-    def __init__(self,bay,stack,containersMatrix,headingTrucksNumber,queuingTrucksNumber,headingContainers,queuingContainers):
+    def __init__(self,bay,stack,containersMatrix,headingTrucksNumber,queuingTrucksNumber,headingContainers,queuingContainers,relocationNumber,taskNumber):
         self.stack=stack
         self.bay=bay
         self.containersMatrix=containersMatrix
@@ -228,9 +232,12 @@ class Observation:
         self.queuingTrucksNumber=queuingTrucksNumber
         self.headingContainers=headingContainers
         self.queuingContianers=queuingContainers
-
+        self.relocationNumber=relocationNumber
+        self.taskNumber=taskNumber
 
 if __name__ == "__main__":
     env = Env(16, 10005, 'train')
-    score = play(env)
-    print('score ', score)
+    for episode in range(10):
+        print(" =====episode ",episode,"=====")
+        score = play(env)
+        # print('score ', score)

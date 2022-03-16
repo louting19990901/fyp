@@ -37,8 +37,6 @@
 
 - [x] 将json转到python
 
-- [ ] 
-
 - [x] reward修改：系统总翻箱数*-1
 
 - [x] 找到管理yard的数据格式
@@ -75,21 +73,25 @@
 
 - [ ] 存储(state,reward)
 
-- [ ] 修改receive_end_info()
+- [x] 修改receive_end_info()
 
-- [ ] 修改最后一次的getAction()  in checkExit()
+- [x] 修改最后一次的getAction()  in checkExit()
 
-- [ ] 循环多个episode
+- [x] 循环多个episode
 
-- [ ] 删掉无关信息（优先度低）
+- [x] 删掉无关信息（优先度低）
 
-- [ ] 创建state类in python
+- [x] 创建state类in python
 
-- [ ] debug：python读取数据ing
+- [x] debug：python读取数据ing
 
-- [ ] 在observation中加入taskNumber和relocationTime
+- [x] 在observation中加入taskNumber和relocationTime
 
-- [ ] 
+- [x] 在communicator.java中发送taskNumber，relocationNumber
+
+- [x] 在python中接收taskNumber，relocationNumber并计算比值
+
+- [x] 在send_end_info.java中加入observation
 
   
 

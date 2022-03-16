@@ -49,7 +49,7 @@ public class Communicator {
 	}
 
 	public void sendEnvInfo(State state, Observation observation, double reward) throws JSONException {
-		System.out.println("send envinfo start");
+		// System.out.println("send envinfo start");
 		JSONObject json = new JSONObject();
 
 		json.put("reward", reward);
@@ -66,8 +66,11 @@ public class Communicator {
 		json.put("headingContainers", observation.headingContainers);
 		json.put("queuingContainers", observation.queuingContainers);
 
+		json.put("taskNumber", observation.taskNumber);
+		json.put("relocationNumber", observation.relocationNumber);
+
 		out.println(json.toString()); // send to client
-		System.out.println("send envinfo end");
+		// System.out.println("send envinfo end");
 
 	}
 
@@ -95,13 +98,7 @@ public class Communicator {
 	public void sendEndInfo(State state) throws JSONException {
 
 		JSONObject json = new JSONObject();
-//		for (int i = 0; i < state.shipAmount * 4; i++) {
-//			String text = " ";
-//			for (Task t : state.queyCranes.get(i).completedTaskList) {
-//				text += df.format(t.waitTime) + " ";
-//			}
-//			json.put(String.valueOf(i), text.trim());
-//		}
+
 		out.println(json.toString()); // send to client
 		// System.out.println(json.toString());
 

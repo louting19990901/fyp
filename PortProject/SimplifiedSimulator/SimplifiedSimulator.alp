@@ -4232,9 +4232,9 @@ for(int i=0;i<toBeLoaded20Containers.size() - 1;i+=2){
 	c1.task = t;
 	c2.task = t;
 	
-	if (c1.source != c2.source){
-		System.out.println("Double Container Source Mismatch");
-	}
+	//if (c1.source != c2.source){
+	//	System.out.println("Double Container Source Mismatch");
+	//}
 	/*
 	// add to the yard task list
 	Yard y = (Yard)c1.source;
@@ -5551,6 +5551,8 @@ if (truckExitAmount == trucks.size()){
 	state.updateTruckDispatchingState(truck, network1);
 	state.isDone = true;
 	try{
+		//Observation observation = new Observation(agent,relocationTime,taskIndex);    
+		
 		env.getAction(state, fixRandom,  R);
 		//env.endEpisode();
 	} catch (IOException | JSONException e) {
@@ -7996,9 +7998,9 @@ if (outTruckFleet instanceof Berth){
 							<Name><![CDATA[onAtExit]]></Name>
 							<Value Class="CodeValue">
 								<Code><![CDATA[Task t = truckDispatch(agent);
-if(t.destination2!= null){
-	System.out.println("\n\n--20--\n\n");
-}
+//if(t.destination2!= null){
+//	System.out.println("\n\n--20--\n\n");
+//}
 agent.task = t;
 t.truck = agent;
 
@@ -10523,7 +10525,7 @@ y.relocationAmount++;
 							<Value Class="CodeValue">
 								<Code><![CDATA[Yard y = (Yard)agent2source(agent);
 // y.showBlockConfiguration();
-System.out.println("relocating====");
+//System.out.println("relocating====");
 
 
 
@@ -80103,7 +80105,7 @@ public
             relocatedStack = top.stack;
             relocatedLayer = top.layer;
 
-            System.out.println("bay " + relocatedBay + " ;stack " + relocatedStack + " ;layer" + relocatedLayer);
+            //System.out.println("bay " + relocatedBay + " ;stack " + relocatedStack + " ;layer" + relocatedLayer);
 
             // target container is the container to be moved to the truck
             // this reference is assigned to each relocated container
@@ -80187,7 +80189,7 @@ public
             String s = String.valueOf(block.get(key).containerPiles.get(0).size());
             sb.append(s);
         }
-        System.out.println(sb);
+        //System.out.println(sb);
 
         return sb.toString();
     }
@@ -80198,13 +80200,13 @@ public
         // show containers in block
         Set<TwoDPoint> keys = block.keySet();
         Iterator<TwoDPoint> it = keys.iterator();
-        System.out.println("Yard: " + this.index + " Block Configuration");
-        System.out.println("Reserved Amount: " + this.reservedAmount);
+        //System.out.println("Yard: " + this.index + " Block Configuration");
+        //System.out.println("Reserved Amount: " + this.reservedAmount);
         while (it.hasNext())
         {
             TwoDPoint key = it.next();
-            System.out.print("Bay: " + key.x + " Stack: " + key.y + " Amount: " + block.get(key).containerPiles.get(0).size());
-            System.out.println();
+            //System.out.print("Bay: " + key.x + " Stack: " + key.y + " Amount: " + block.get(key).containerPiles.get(0).size());
+            //System.out.println();
         }
     }
 
@@ -82070,7 +82072,7 @@ public class Observation implements Serializable {
     	this.queuingTrucksNumber=queuingTrucks.size();
     	this.taskNumber=taskNumber;
 		this.relocationNumber=relocationNumber;
-		System.out.println("taskNumber: "+taskNumber+";relocationNumber: "+relocationNumber);
+		//System.out.println("taskNumber: "+taskNumber+";relocationNumber: "+relocationNumber);
     	
     	
     	headingContainers=new StringBuffer("");
