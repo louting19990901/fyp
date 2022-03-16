@@ -49,35 +49,17 @@ public class Communicator {
 	}
 
 	public void sendEnvInfo(State state, Observation observation, double reward) throws JSONException {
-		/*
-		 * double[] truckToQCDistance = state.truckToQCDistance; // static distance
-		 * int[] qcRemainTaskAmount = state.qcRemainTaskAmount; int[] qcTruckQueueLength
-		 * = state.qcTruckQueueLength; //double[] qcUtilization = info.qcUtilization;
-		 * int[] currentWorkingTruckAmount = state.currentWorkingTruckAmount; int
-		 * shipAmount = state.shipAmount; //ArrayList<Double> operationTimes =
-		 * state.taskOperationTimes; boolean isDone = state.isDone;
-		 */
-		// send json object (state, reward, isDone)
-
+		System.out.println("send envinfo start");
 		JSONObject json = new JSONObject();
-//		json.put("truckToQCDistance", state.truckToQCDistance);
-//		json.put("qcRemainTaskAmount", state.qcRemainTaskAmount);
-//		json.put("qcTruckQueueLength", state.qcTruckQueueLength);
-//		json.put("currentWorkingTruckAmount", state.currentWorkingTruckAmount);
-//		json.put("headingToQCAmount", state.headingToQCAmount);
-//		json.put("qcTypes", state.qcTypes);
-//		json.put("shipAmount", state.shipAmount);
-//		//json.put("operationTimes", operationTimes);
 
 		json.put("reward", reward);
-		// put json from state
 
+		// put json from state
 		json.put("isDone", state.isDone);
 
 		// put json from observation
 		json.put("stack", observation.stack);
 		json.put("bay", observation.bay);
-
 		json.put("containersMatrix", observation.containersMatrix);
 		json.put("headingTrucksNumber", observation.headingTrucksNumber);
 		json.put("queuingTrucksNumber", observation.queuingTrucksNumber);
@@ -85,6 +67,7 @@ public class Communicator {
 		json.put("queuingContainers", observation.queuingContainers);
 
 		out.println(json.toString()); // send to client
+		System.out.println("send envinfo end");
 
 	}
 

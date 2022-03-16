@@ -97,7 +97,7 @@ public class Env {
 	public ArrayList<Integer> executedActions = new ArrayList<Integer>();
 
 	public int getAction(Object state, boolean fixRandom, Random R) throws JSONException, IOException {
-
+		System.out.println("original getaction function is called");
 		State info = (State) state;
 
 		if (info.portNum == 0) {

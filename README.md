@@ -87,6 +87,10 @@
 
 - [ ] debug：python读取数据ing
 
+- [ ] 在observation中加入taskNumber和relocationTime
+
+- [ ] 
+
   
 
 

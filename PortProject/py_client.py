@@ -184,13 +184,7 @@ def RLGetAction(observation):
     #print("RL get action...")
     act = random.randint(0, 5)
 
-    # while(True):
-    #     print("obs: ",observation.bay," ",act," shape")
-    #     for i in range(25):
-    #         for j in range(6):
-    #             print(observation.containersMatrix[i*6+j],end="")
-    #         print()
-
+    while(True):
         pileSize = int(observation.containersMatrix[observation.bay*6+act])
         print(pileSize)
         if(act != observation.stack) and (pileSize < 7):
