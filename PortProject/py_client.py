@@ -174,6 +174,7 @@ class Env():
 
     def step(self, action:int):
         print("5555")
+        print("action is ",action)
         self.client.send(str(action).encode('GBK'))
         print("4444")
         info = json.loads(str(self.client.recv(1024), encoding="GBK"))
@@ -192,8 +193,8 @@ class Env():
         is_done = info.get('isDone')
         if not is_done:
         #     print("state0: ")
-        #     print("bay: ", type(bay), " : ", bay)
-        #     print("stack: ", type(stack), " : ", stack)
+            print("bay: ", type(bay), " : ", bay)
+            print("stack: ", type(stack), " : ", stack)
         #     print("containerMatrix: ", type(containersMatrix), " : ", containersMatrix)
         #     print("headingTrucksNumber: ", type(headingTrucksNumber), " : ", headingTrucksNumber)
         #     print("queuingTrucksNumber: ", type(queuingTrucksNumber), " : ", queuingTrucksNumber)
