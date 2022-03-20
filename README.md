@@ -105,6 +105,16 @@
 
   
 
+### stable-baseline3 
+
+- [x] 通过check_env()
+- [ ] 找出action_sample的替代方法
+  - [ ] try:当出现不合理的action时，给一个超大的惩罚，令isDone=false
+  - [ ] try: 将之前返回的150个参数变为5个：原本一个bay应该是6个stack，但是只要记录下原本stack的位置，sample的时候在5个action中选择一个；坏处：但是还要解决layer>4的问题，结构并没有改变： 好处：传输的信息变少（加快model速度），无关参数减少（提高训练效率）
+  - [ ] 
+
+
+
 
 
 
@@ -138,6 +148,26 @@
 更改status
 
 
+
+
+
+
+
+### wrapper
+
+- 设置max episode
+- normalize the action space\
+
+
+
+
+
+### DQN 算法
+
+- [ ] A2C
+- [ ] DQN
+- [ ] PPO
+- [ ] 
 
 
 

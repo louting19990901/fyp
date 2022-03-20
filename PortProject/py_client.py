@@ -10,6 +10,8 @@ import torch.nn as nn
 import gym
 import torch.nn.functional as F
 import math
+import time
+tic = time.time()
 
 # Hyper Parameters
 BATCH_SIZE = 32

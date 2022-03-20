@@ -80183,11 +80183,14 @@ public
         StringBuffer sb = new StringBuffer("");
         Set<TwoDPoint> keys = block.keySet();
         Iterator<TwoDPoint> it = keys.iterator();
+        int i=0;
         while (it.hasNext())
         {
+        	
             TwoDPoint key = it.next();
             String s = String.valueOf(block.get(key).containerPiles.get(0).size());
             sb.append(s);
+            i+=1;
         }
         //System.out.println(sb);
 

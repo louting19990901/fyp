@@ -68,7 +68,8 @@ public class Communicator {
 
 		json.put("taskNumber", observation.taskNumber);
 		json.put("relocationNumber", observation.relocationNumber);
-
+//		System.out.println("**********");
+//		System.out.println(json.toString());
 		out.println(json.toString()); // send to client
 		// System.out.println("send envinfo end");
 
@@ -83,7 +84,7 @@ public class Communicator {
 		 * shipAmount = state.shipAmount; //ArrayList<Double> operationTimes =
 		 * state.taskOperationTimes; boolean isDone = state.isDone;
 		 */
-		// send json object (state, reward, isDone)
+//		 send json object (state, reward, isDone)
 
 		JSONObject json = new JSONObject();
 		// put reward as json
@@ -98,7 +99,7 @@ public class Communicator {
 	public void sendEndInfo(State state) throws JSONException {
 
 		JSONObject json = new JSONObject();
-
+//		json.put("isDone", true);
 		out.println(json.toString()); // send to client
 		// System.out.println(json.toString());
 

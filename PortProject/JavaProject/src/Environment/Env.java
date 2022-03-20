@@ -112,6 +112,7 @@ public class Env {
 		}
 
 		boolean isDone = info.isDone;
+		System.out.println("=====this is old getaction, isDone :" + isDone);
 		int portNum = info.portNum;
 		double reward = 0;
 
@@ -126,9 +127,9 @@ public class Env {
 			action = com.get(portNum).getAction();
 			executedActions.add(action);
 		} else {
-			com.get(portNum).getAction();
+//			com.get(portNum).getAction();
 
-			com.get(portNum).sendEndInfo(info);
+//			com.get(portNum).sendEndInfo(info);
 			/*
 			 * System.out.println("Executed Actions in Server: "); for (Integer a :
 			 * executedActions) { System.out.print(a+" "); } System.out.println();
@@ -167,14 +168,16 @@ public class Env {
 		}
 
 		com.get(portNum).sendEnvInfo(info, observation, reward);
+
 		int action;
 		if (!isDone) {
 			action = com.get(portNum).getAction();
 			executedActions.add(action);
 		} else {
-			com.get(portNum).getAction();
 
-			com.get(portNum).sendEndInfo(info);
+			com.get(portNum).getAction();
+			System.out.println("this should not prompt");
+//			com.get(portNum).sendEndInfo(info);
 			/*
 			 * System.out.println("Executed Actions in Server: "); for (Integer a :
 			 * executedActions) { System.out.print(a+" "); } System.out.println();
