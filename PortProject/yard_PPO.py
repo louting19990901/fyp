@@ -7,8 +7,13 @@ from stable_baselines3.common.env_util import make_vec_env
 # env = make_vec_env("CartPole-v1", n_envs=4)
 
 env = YardEnv(16, 10011, 'train')
-model = PPO("MlpPolicy", env, verbose=1)
-model.learn(total_timesteps=10)
+episode=1000
+total_task_number=2500
+
+model = PPO("MlpPolicy", env, verbose=1).learn(total_task_number*2500)
+
+
+print("end training")
 model.save("ppo_yard")
 
 del model # remove to demonstrate saving and loading
@@ -18,6 +23,11 @@ model = PPO.load("ppo_yard")
 obs = env.reset()
 
 while True:
-    action, _states = model.predict(obs)
-    obs, rewards, dones, info = env.step(action)
-    env.render()
+
+  action, _ = model.predict(obs, deterministic=True)
+  obs, reward, done, info = env.step(action)
+  env.render()
+  print("testing")
+  if done:
+    print("Goal reached!", "reward=", reward)
+    break

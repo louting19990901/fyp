@@ -46,6 +46,7 @@ class YardEnv(gym.Env):
     """Custom Environment that follows gym interface"""
     metadata = {'render.modes': ['human']}
     observation=None
+    count=0
 
     def __init__(self, n_actions, port, env_type):
         super(YardEnv, self).__init__()
@@ -254,7 +255,9 @@ class YardEnv(gym.Env):
             s_=self.getState(obs)
             return s_, reward, is_done,{}
         else:
-            print("episode end, relocation: ",self.observation.relocationNumber)
+
+            print("episode ",self.count," end, relocation: ",self.observation.relocationNumber)
+            self.count+=1
             return np.zeros(30).astype(np.uint8),-1,is_done,{}
 
     def render(self, mode='human'):
