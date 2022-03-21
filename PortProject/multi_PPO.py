@@ -28,8 +28,7 @@ from stable_baselines3 import PPO, A2C
 #     break
 
 
-
-def make_env( rank, seed=0):
+def make_env(env_id, rank, seed=0):
     """
     Utility function for multiprocessed env.
 
@@ -38,9 +37,8 @@ def make_env( rank, seed=0):
     :param rank: (int) index of the subprocess
     """
 
-    def _init(env_id):
-        env = YardEnv(16, env_id, 'train')
-        # env_id+=1
+    def _init():
+        env = gym.make(env_id)
         # Important: use a different seed for each environment
         env.seed(seed + rank)
         return env
@@ -52,7 +50,7 @@ def make_env( rank, seed=0):
 # The different number of processes that will be used
 PROCESSES_TO_TEST = [1, 2, 4, 8, 16]
 NUM_EXPERIMENTS = 3 # RL algorithms can often be unstable, so we run several experiments (see https://arxiv.org/abs/1709.06560)
-
+env_id="py_client_sb"
 episode=30
 total_task_number=210  #average step per episode
 TRAIN_STEPS = total_task_number*episode
@@ -61,9 +59,10 @@ EVAL_EPS = 20
 ALGO = A2C
 
 # We will create one environment to evaluate the agent on
-eval_env =  YardEnv(16, 0, 'train')
+# eval_env =  YardEnv(16, 0, 'train')
+eval_env = gym.make(env_id)
 # eval_env.reset()
-
+print("succ")
 reward_averages = []
 reward_std = []
 training_times = []

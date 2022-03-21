@@ -49,14 +49,16 @@ class YardEnv(gym.Env):
     observation=None
     count=0
     zero_port=10006
-    is_connected = [False] * 16
+    is_connected =False
+    relocation_list=[]
+    episode_list=[]
 
     def __init__(self, n_actions, port, env_type):
         super(YardEnv, self).__init__()
         self.client = None
-        print("ini port is ",port)
+        # print("ini port is ",port)
         self.port = port
-        # self.is_connected = False
+        self.is_connected = False
 
 
         self.qc_num = n_actions
@@ -73,21 +75,21 @@ class YardEnv(gym.Env):
 
         # start server and client
     def start_java_end(self):
-        print("self.port: ",self.port)
-        print("1: ",os.getcwd())
+        # print("self.port: ",self.port)
+        # print("1: ",os.getcwd())
 
-        if self.port!=0:
-            os.chdir("..")
+
+        # os.chdir("..")
         os.chdir("JavaProject/bin")
-        print("2: ", os.getcwd())
+        # print("2: ", os.getcwd())
 
-        print("3: ", os.getcwd())
+        # print("3: ", os.getcwd())
         jvmPath = jpype.getDefaultJVMPath()
         jar_path = '-Djava.class.path={}'.format(
             self.get_jars(self.root_path))
         if not jpype.isJVMStarted():
             jpype.startJVM(jvmPath, jar_path)
-        print("4:",os.getcwd())
+        # print("4:",os.getcwd())
         javaClass = jpype.JClass("Environment.Executor")
 
         '''
@@ -102,10 +104,10 @@ class YardEnv(gym.Env):
         result = javaInstance.test_func(123)
         print(result)
         '''
-        print("5: ", os.getcwd())
+        # print("5: ", os.getcwd())
         os.chdir("..")
-        print("6: ", os.getcwd())
-        print("current port: ",self.port+self.zero_port)
+        # print("6: ", os.getcwd())
+        # print("current port: ",self.port+self.zero_port)
         executor = javaClass(self.zero_port+self.port, self.env_type)  # get an instance of java object
 
         #javaInstance = javaClass.getInstance('demo')  # invoke class static function directly
@@ -139,11 +141,11 @@ class YardEnv(gym.Env):
         self.executor.startServer()
 
         # connect to server
-        print("port ",self.port," connect: ",self.is_connected)
-        if not self.is_connected[self.port]:
+        # print("port ",self.port," connect: ",self.is_connected)
+        if not self.is_connected:
             self.client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             self.client.connect(('127.0.0.1', self.zero_port+self.port))
-            self.is_connected[self.port] = True
+            self.is_connected = True
 
 
         info = json.loads(str(self.client.recv(1024), encoding="GBK"))
@@ -227,18 +229,18 @@ class YardEnv(gym.Env):
             if (action != self.observation.stack) and (pileSize <= 3):
                 return action
             else:
-                #print("change to ",action)
                 # action = np.random.randint(0, 6)
                 action=(action+1)%6
+                print("change to ", action)
 
     def step(self, action:int):
 
         action=self.checkAction((action))
-
+        print("1111")
         self.client.send(str(action).encode('GBK'))
-
+        print(22222)
         info = json.loads(str(self.client.recv(1024), encoding="GBK"))
-
+        print(3333)
         bay=info.get("bay")
         stack=info.get("stack")
         containersMatrix=info.get("containersMatrix")
@@ -266,7 +268,7 @@ class YardEnv(gym.Env):
                 print("relocationNumber: ",relocationNumber," taskNumber: ",taskNumber)
                 print(" relocationNumber/taskNumber: ",float(relocationNumber)/float(taskNumber))
                 print("is_done: ", type(is_done), " : ", is_done)
-            reward=-float(relocationNumber)/float(taskNumber)
+            reward=(-1*float(relocationNumber)/float(taskNumber)+0.07)*100
             obs = Observation(bay, stack, containersMatrix, headingTrucksNumber, queuingTrucksNumber, headingContainers,queuingContainers,relocationNumber)
             self.observation=obs
             s_=self.getState(obs)
@@ -274,7 +276,9 @@ class YardEnv(gym.Env):
         else:
 
             print("episode ",self.count," end, relocation: ",self.observation.relocationNumber)
-            self.count+=1
+            self.relocation_list.append(self.observation.relocationNumber)
+            self.episode_list.append(self.count)
+            self.count += 1
             return np.zeros(30).astype(np.uint8),-1,is_done,{}
 
     def render(self, mode='human'):

@@ -166,12 +166,13 @@ public class Env {
 		if (isDone) {
 			reward = getFinalReward(info.queyCranes);
 		}
-
+		System.out.println("4444");
 		com.get(portNum).sendEnvInfo(info, observation, reward);
-
+		System.out.println("5555");
 		int action;
 		if (!isDone) {
 			action = com.get(portNum).getAction();
+			System.out.println("6666");
 			executedActions.add(action);
 		} else {
 
