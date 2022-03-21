@@ -8,7 +8,7 @@ from stable_baselines3.common.env_util import make_vec_env
 
 env = YardEnv(16, 10011, 'train')
 episode=1000
-total_task_number=2500
+total_task_number=210  #average step per episode
 
 model = PPO("MlpPolicy", env, verbose=1).learn(total_task_number*2500)
 

@@ -112,7 +112,7 @@ public class Env {
 		}
 
 		boolean isDone = info.isDone;
-		System.out.println("=====this is old getaction, isDone :" + isDone);
+//		System.out.println("=====this is old getaction, isDone :" + isDone);
 		int portNum = info.portNum;
 		double reward = 0;
 

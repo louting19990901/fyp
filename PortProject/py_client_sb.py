@@ -31,6 +31,7 @@ class Observation:   #total 174 bit => total 30
 
 
 
+
     def __init__(self,bay,stack,containersMatrix,headingTrucksNumber,queuingTrucksNumber,headingContainers,queuingContainers,relocationNumber):
         self.stack=stack
         self.bay=bay
@@ -47,12 +48,17 @@ class YardEnv(gym.Env):
     metadata = {'render.modes': ['human']}
     observation=None
     count=0
+    zero_port=10006
+    is_connected = [False] * 16
 
     def __init__(self, n_actions, port, env_type):
         super(YardEnv, self).__init__()
         self.client = None
+        print("ini port is ",port)
         self.port = port
-        self.is_connected = False
+        # self.is_connected = False
+
+
         self.qc_num = n_actions
         self.env_type = env_type
         self.root_path = os.getcwd()
@@ -67,13 +73,21 @@ class YardEnv(gym.Env):
 
         # start server and client
     def start_java_end(self):
+        print("self.port: ",self.port)
+        print("1: ",os.getcwd())
+
+        if self.port!=0:
+            os.chdir("..")
         os.chdir("JavaProject/bin")
+        print("2: ", os.getcwd())
+
+        print("3: ", os.getcwd())
         jvmPath = jpype.getDefaultJVMPath()
         jar_path = '-Djava.class.path={}'.format(
             self.get_jars(self.root_path))
         if not jpype.isJVMStarted():
             jpype.startJVM(jvmPath, jar_path)
-        print(os.getcwd())
+        print("4:",os.getcwd())
         javaClass = jpype.JClass("Environment.Executor")
 
         '''
@@ -88,8 +102,11 @@ class YardEnv(gym.Env):
         result = javaInstance.test_func(123)
         print(result)
         '''
+        print("5: ", os.getcwd())
         os.chdir("..")
-        executor = javaClass(self.port, self.env_type)  # get an instance of java object
+        print("6: ", os.getcwd())
+        print("current port: ",self.port+self.zero_port)
+        executor = javaClass(self.zero_port+self.port, self.env_type)  # get an instance of java object
 
         #javaInstance = javaClass.getInstance('demo')  # invoke class static function directly
 
@@ -118,15 +135,15 @@ class YardEnv(gym.Env):
 
     def reset(self):
     
-        # start server and simulation
+        # start java server and simulation
         self.executor.startServer()
 
         # connect to server
-
-        if not self.is_connected:
+        print("port ",self.port," connect: ",self.is_connected)
+        if not self.is_connected[self.port]:
             self.client = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            self.client.connect(('127.0.0.1', self.port))
-            self.is_connected = True
+            self.client.connect(('127.0.0.1', self.zero_port+self.port))
+            self.is_connected[self.port] = True
 
 
         info = json.loads(str(self.client.recv(1024), encoding="GBK"))
@@ -249,7 +266,7 @@ class YardEnv(gym.Env):
                 print("relocationNumber: ",relocationNumber," taskNumber: ",taskNumber)
                 print(" relocationNumber/taskNumber: ",float(relocationNumber)/float(taskNumber))
                 print("is_done: ", type(is_done), " : ", is_done)
-            reward=float(relocationNumber)/float(taskNumber)
+            reward=-float(relocationNumber)/float(taskNumber)
             obs = Observation(bay, stack, containersMatrix, headingTrucksNumber, queuingTrucksNumber, headingContainers,queuingContainers,relocationNumber)
             self.observation=obs
             s_=self.getState(obs)
