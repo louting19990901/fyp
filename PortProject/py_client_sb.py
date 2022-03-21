@@ -76,14 +76,18 @@ class YardEnv(gym.Env):
         # start server and client
     def start_java_end(self):
         # print("self.port: ",self.port)
-        # print("1: ",os.getcwd())
+        # print("1: ",os.getcwd(),type(os.getcwd()))
 
-
+        if (os.getcwd() != r"C:\Users\86189\Desktop\fyp\fyp\PortProject"):
+            os.chdir("..")
         # os.chdir("..")
-        os.chdir("JavaProject/bin")
         # print("2: ", os.getcwd())
+        os.chdir("JavaProject/bin")
+
+
 
         # print("3: ", os.getcwd())
+
         jvmPath = jpype.getDefaultJVMPath()
         jar_path = '-Djava.class.path={}'.format(
             self.get_jars(self.root_path))
@@ -231,16 +235,31 @@ class YardEnv(gym.Env):
             else:
                 # action = np.random.randint(0, 6)
                 action=(action+1)%6
-                print("change to ", action)
+                # print("change to ", action)
+                # print("this should 11 not prompt")
+
+    def checkActionValid(self,action:int):
+        pileSize = int(self.observation.containersMatrix[self.observation.bay * 6 + action])
+        if (action != self.observation.stack) and (pileSize <= 3):
+            return True
+        else:
+            return False
 
     def step(self, action:int):
 
-        action=self.checkAction((action))
-        print("1111")
+        if not self.checkActionValid(action):
+            # print("!!!!!!!!!")
+            if(self.env_type=="test"):
+                action = self.checkAction((action))
+            else:
+                return self.getState(self.observation),-100,False,{"validAction":False}
+
+
+        # print("           1111111")
         self.client.send(str(action).encode('GBK'))
-        print(22222)
+        # print("        22222222")
         info = json.loads(str(self.client.recv(1024), encoding="GBK"))
-        print(3333)
+        # print("         333333")
         bay=info.get("bay")
         stack=info.get("stack")
         containersMatrix=info.get("containersMatrix")
@@ -272,14 +291,14 @@ class YardEnv(gym.Env):
             obs = Observation(bay, stack, containersMatrix, headingTrucksNumber, queuingTrucksNumber, headingContainers,queuingContainers,relocationNumber)
             self.observation=obs
             s_=self.getState(obs)
-            return s_, reward, is_done,{}
+            return s_, reward, is_done,{"validAction":True}
         else:
 
             print("episode ",self.count," end, relocation: ",self.observation.relocationNumber)
             self.relocation_list.append(self.observation.relocationNumber)
             self.episode_list.append(self.count)
             self.count += 1
-            return np.zeros(30).astype(np.uint8),-1,is_done,{}
+            return np.zeros(30).astype(np.uint8),-1,is_done,{"validAction":True}
 
     def render(self, mode='human'):
         pass 
