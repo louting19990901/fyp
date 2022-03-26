@@ -127,7 +127,7 @@ outIndex = truckAmount;
 
 
 // create some no ship containers
-/*
+
 int amount = 2000;
 for (int i=0;i<amount;i++){
 	Yard y = chooseRandomImportYard();
@@ -136,6 +136,9 @@ for (int i=0;i<amount;i++){
 	c.bay = td.x;
 	c.stack = td.y;
 	c.layer = y.block.get(td).containerPiles.get(0).size();
+	if(c.size==20){
+		continue;
+	}
 	y.block.get(td).containerPiles.get(0).push(c);
 	y.reservedAmount++;
 	
@@ -148,7 +151,7 @@ for (int i=0;i<amount;i++){
 	}
 	drawSingleContainer(y.blockArea, c.bay, c.stack, c.layer, c);
 }
-*/
+
 
 
 /*
