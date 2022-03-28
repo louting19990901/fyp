@@ -147,10 +147,12 @@ public class Env {
 		if (info.portNum == 0) {
 			int action = new Random().nextInt(6);
 			while (true) {
+
 				Stack<Container> pile = (observation.block.get(new TwoDPoint(observation.bay, action))).containerPiles
 						.get(0);
 
 				if (action != observation.stack && (pile.size() < 6 + 1)) {
+					System.out.println("relo action is " + action);
 					return action;
 				} else {
 					action = new Random().nextInt(6);

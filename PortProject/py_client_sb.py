@@ -52,6 +52,8 @@ class YardEnv(gym.Env):
     is_connected =False
     relocation_list=[]
     episode_list=[]
+    last100relocationNumbers=np.zeros(100)
+    last100Rewards=np.zeros(100)
 
     def __init__(self, n_actions, port, env_type):
         super(YardEnv, self).__init__()
@@ -78,11 +80,11 @@ class YardEnv(gym.Env):
         # print("self.port: ",self.port)
         # print("1: ",os.getcwd(),type(os.getcwd()))
 
-        if (os.getcwd() != r"C:\Users\86189\Desktop\fyp\fyp\PortProject"):
-            os.chdir("..")
+        # if (os.getcwd() != r"C:\Users\86189\Desktop\fyp\fyp\PortProject"):
+        #     os.chdir("..")
         # os.chdir("..")
         # print("2: ", os.getcwd())
-        os.chdir("JavaProject/bin")
+        os.chdir("C:/Users/86189/Desktop/fyp/fyp/PortProject/JavaProject/bin")
 
 
 
@@ -140,7 +142,7 @@ class YardEnv(gym.Env):
         return temp
 
     def reset(self):
-    
+        print("reset")
         # start java server and simulation
         self.executor.startServer()
 
@@ -184,6 +186,7 @@ class YardEnv(gym.Env):
         obs=Observation(bay,stack,containersMatrix,headingTrucksNumber,queuingTrucksNumber,headingContainers,queuingContainers,relocationNumber)
         self.observation=obs
         s=self.getState(obs)
+        print("end reset")
         return s
 
     def receive_end_info(self):
@@ -230,29 +233,30 @@ class YardEnv(gym.Env):
             pileSize = int(self.observation.containersMatrix[self.observation.bay * 6 + action])
 
 
-            if (action != self.observation.stack) and (pileSize <= 3):
+            if (action != self.observation.stack) and (pileSize <6):
                 return action
             else:
                 # action = np.random.randint(0, 6)
+
                 action=(action+1)%6
                 # print("change to ", action)
-                # print("this should 11 not prompt")
+                # print("this should not prompt")
 
     def checkActionValid(self,action:int):
         pileSize = int(self.observation.containersMatrix[self.observation.bay * 6 + action])
-        if (action != self.observation.stack) and (pileSize <= 3):
+        if (action != self.observation.stack) and (pileSize <6):
             return True
         else:
             return False
 
     def step(self, action:int):
-
+        # print("step")
         if not self.checkActionValid(action):
             # print("!!!!!!!!!")
             if(self.env_type=="test"):
                 action = self.checkAction((action))
             else:
-                return self.getState(self.observation),-100,False,{"validAction":False}
+                return self.getState(self.observation),-1000,False,{"validAction":False}
 
 
         # print("           1111111")
@@ -294,10 +298,15 @@ class YardEnv(gym.Env):
             return s_, reward, is_done,{"validAction":True}
         else:
 
-            print("episode ",self.count," end, relocation: ",self.observation.relocationNumber)
+            print("port ",self.port,": episode ",self.count," end, relocation: ",self.observation.relocationNumber)
             self.relocation_list.append(self.observation.relocationNumber)
             self.episode_list.append(self.count)
+            self.last100relocationNumbers[self.count%100]=relocationNumber
+            # self.last100Rewards[self.count%100]=
+            if(self.count%100==0 and self.count!=0):
+                self.relocation_list[int(self.count/100)]=np.mean(self.last100relocationNumbers)
             self.count += 1
+            print("end step")
             return np.zeros(30).astype(np.uint8),-1,is_done,{"validAction":True}
 
     def render(self, mode='human'):

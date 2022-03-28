@@ -1,11 +1,13 @@
 import gym
-from py_client_sb import YardEnv
+# from py_client_sb import YardEnv
+from py_client_reward import YardEnv
 from stable_baselines3 import PPO
 from stable_baselines3.common.env_util import make_vec_env
 import matplotlib.pyplot as plt
 from stable_baselines3.common.evaluation import evaluate_policy
 import os
 import time
+import numpy as np
 os.environ["KMP_DUPLICATE_LIB_OK"]="TRUE"
 
 
@@ -32,14 +34,12 @@ print(due)
 # y=[1,2,3,4]
 # plt.plot(x,y)
 
-# print("111",env.episode_list, env.relocation_list)
-# plt.plot(env.episode_list, env.relocation_list)
-# plt.show()
+
 model.save("ppo_yard")
 
-del model # remove to demonstrate saving and loading
-
-model = PPO.load("ppo_yard")
+# del model # remove to demonstrate saving and loading
+#
+# model = PPO.load("ppo_yard")
 #
 # obs = env.reset()
 #
@@ -63,3 +63,10 @@ eval_env = YardEnv(16, 1, 'test')
 
 mean_reward, std_reward = evaluate_policy(model, eval_env, n_eval_episodes=100)
 print(f"mean_reward:{mean_reward:.2f} +/- {std_reward:.2f}")
+
+
+# print(env.episode_list, env.relocation_list)
+
+plt.plot(env.relocation_list, range(len(env.relocation_list)))
+
+plt.show()

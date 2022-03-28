@@ -21,7 +21,8 @@ from stable_baselines3 import PPO
 from stable_baselines3.common.vec_env import DummyVecEnv, SubprocVecEnv
 from stable_baselines3.common.env_util import make_vec_env
 from stable_baselines3.common.utils import set_random_seed
-
+import os
+os.environ["KMP_DUPLICATE_LIB_OK"]="TRUE"
 def make_env(env_id, rank, seed=0):
     """
     Utility function for multiprocessed env.
@@ -38,42 +39,34 @@ def make_env(env_id, rank, seed=0):
     set_random_seed(seed)
     return _init
 
+def getMean(arr):
+    sum=0.0
+    for i in arr:
+        sum+=i
+    return float(sum)/float(len(arr))
+
 if __name__ == '__main__':
     # env_id = "CartPole-v1"
     num_cpu = 4  # Number of processes to use
-    # Create the vectorized environment
-    print("111111")
-
-    # env=DummyVecEnv([YardEnv(16,10,"train"),YardEnv(16,11,"train"),YardEnv(16,12,"train"),YardEnv(16,13,"train")])
-    # Stable Baselines provides you with make_vec_env() helper
-    # which does exactly the previous steps for you.
-    # You can choose between `DummyVecEnv` (usually faster) and `SubprocVecEnv`
-    # env = make_vec_env(env_id, n_envs=num_cpu, seed=0, vec_env_cls=SubprocVecEnv)
-
-    eval_env = YardEnv(16, 20, 'test')
-    episode = 10000
+    eval_env = YardEnv(16, 40, 'test')
+    episode = 100
     total_task_number = 200
-
     core=4
 
-
-    env = SubprocVecEnv([make_env(i + 10, i + 10) for i in range(core)])
-    tic = time.time()
-    # model = PPO('MlpPolicy', env, verbose=1)
-    # model = A2C('MlpPolicy', env, verbose=1)
+    env = SubprocVecEnv([make_env(i + 20, i + 20) for i in range(core)])
     model = PPO('MlpPolicy', env, verbose=1)
+
+    tic = time.time()
     model.learn(total_timesteps=total_task_number*episode)
     toc = time.time()
     due = toc - tic
-    print("==========")
     print(core," core take ",due)
-    mean_reward, std_reward = evaluate_policy(model, eval_env, n_eval_episodes=10)
-    print()
+    mean_reward, std_reward = evaluate_policy(model, eval_env, n_eval_episodes=100)
     print(f"mean_reward:{mean_reward:.2f} +/- {std_reward:.2f}")
-    #plot
 
-
-
+    print(getMean(eval_env.relocation_list))
+    plt.plot( range(len(eval_env.relocation_list)),eval_env.relocation_list)
+    plt.show()
 
 
     #

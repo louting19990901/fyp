@@ -113,8 +113,11 @@
   - [x] try: 将之前返回的150个参数变为5个：原本一个bay应该是6个stack，但是只要记录下原本stack的位置，sample的时候在5个action中选择一个；坏处：但是还要解决layer>4的问题，结构并没有改变： 好处：传输的信息变少（加快model速度），无关参数减少（提高训练效率）
   - [x] debug:解决n_proxs问题+路径问题（第二次不需要再定位文件位置）：失败
   - [x] sub_vec_make:需要尝试注册自定义env： 失败
-- [ ] evaluate helper
+- [x] evaluate helper
 - [ ] 考虑通过fix random锁定环境 
+- [ ] 每个几代evaluate一次并画图
+- [ ] 并行 dummy
+- [ ] 删掉anylogic中的flowControl fail to contain truck语句
 
 
 
@@ -141,6 +144,7 @@
   - reshuffleNumber/taskNumber
 - 给机器加上好奇心：碰到新事物可以增加reward
 - action mask? 给不合理动作一个巨大的负值
+- 
 
 
 
@@ -174,6 +178,33 @@
 
 
 
+# reward
+
+- [ ] 根据relocationNumber来计算reward
+  - [x] reward=-(翻箱数/任务数-baseline)
+  - [x] reward=log(翻箱数/任务数-baseline)
+  - [x] 在anylogic中计算当前设置最少的翻箱数，reward=预计翻箱数-实际翻箱数
+- [ ] 当container放置的位置不合适时，reward=-1000
+  - [x] layer>4
+  - [x] 翻箱前后位置未改变
+- [ ] 根据layer来计算reward
+  - [ ] 翻箱后当前pile的layer（1<=layer<=6)越小越好 ，reward=6-layer
+- [ ] 翻箱后的container尽量不影响需要被取走的container
+  - [ ] 如果翻箱后的container在要被取走的container上方，reward=-10
+- [ ] 
+
+
+
+
+
+# REFLECTION
+
+- 和supervised learning的区别
+- sparsed reward情况下reward的设置
+- reward delay
+- exploration
+  - add noise
+  - use big discount factor
 
 
 
@@ -181,8 +212,15 @@
 
 
 
+# PPO
+
+- the actor to train has to know its difference from the actor to interact
+- https://youtu.be/OAKAZhFmYol
 
 
 
+### DQN
 
+https://youtu.be/o_g9JUMw1Occ
 
+https://youtu.be/2-zGCx4iv_k
