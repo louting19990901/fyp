@@ -23,6 +23,9 @@ from stable_baselines3.common.env_util import make_vec_env
 from stable_baselines3.common.utils import set_random_seed
 import os
 os.environ["KMP_DUPLICATE_LIB_OK"]="TRUE"
+
+global_relocation_list=[]
+
 def make_env(env_id, rank, seed=0):
     """
     Utility function for multiprocessed env.
@@ -33,7 +36,7 @@ def make_env(env_id, rank, seed=0):
     :param rank: (int) index of the subprocess
     """
     def _init():
-        env = YardEnv(16,env_id,"train")
+        env = YardEnv(16,env_id,"train",global_relocation_list)
         env.seed(seed + rank)
         return env
     set_random_seed(seed)
@@ -48,31 +51,23 @@ def getMean(arr):
 if __name__ == '__main__':
     # env_id = "CartPole-v1"
     num_cpu = 4  # Number of processes to use
-    eval_env = YardEnv(16, 40, 'test')
-    episode = 100
+    # eval_env = YardEnv(16, 50, 'test')
+    episode = 1
     total_task_number = 200
-    core=4
 
-    env = SubprocVecEnv([make_env(i + 20, i + 20) for i in range(core)])
-    model = PPO('MlpPolicy', env, verbose=1)
+
+    env = SubprocVecEnv([make_env(i + 20, i + 20) for i in range(num_cpu)])
+    model = PPO('MlpPolicy', env, verbose=1,tensorboard_log="./yard_tensorboard/")
 
     tic = time.time()
     model.learn(total_timesteps=total_task_number*episode)
     toc = time.time()
     due = toc - tic
-    print(core," core take ",due)
-    mean_reward, std_reward = evaluate_policy(model, eval_env, n_eval_episodes=100)
-    print(f"mean_reward:{mean_reward:.2f} +/- {std_reward:.2f}")
+    print(num_cpu," core take ",due)
+    # mean_reward, std_reward = evaluate_policy(model, eval_env, n_eval_episodes=1)
+    # print(f"mean_reward:{mean_reward:.2f} +/- {std_reward:.2f}")
 
-    print(getMean(eval_env.relocation_list))
-    plt.plot( range(len(eval_env.relocation_list)),eval_env.relocation_list)
+    print(getMean(global_relocation_list))
+    plt.plot( range(len(global_relocation_list)),global_relocation_list)
     plt.show()
 
-
-    #
-    #
-    # obs = env.reset()
-    # for _ in range(1000):
-    #     action, _states = model.predict(obs)
-    #     obs, rewards, dones, info = env.step(action)
-    #     env.render()

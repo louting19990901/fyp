@@ -150,6 +150,7 @@ for (int i=0;i<amount;i++){
 }
 */
 
+
 /*
 try{
 	db = new ConnectDB();
@@ -637,7 +638,7 @@ startTimeInModel = time();
 					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
 						<Type><![CDATA[boolean]]></Type>        
 						<InitialValue Class="CodeValue">
-							<Code><![CDATA[false]]></Code>
+							<Code><![CDATA[true]]></Code>
 						</InitialValue>
 					</Properties>
 				</Variable>
@@ -667,7 +668,7 @@ startTimeInModel = time();
 					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
 						<Type><![CDATA[boolean]]></Type>        
 						<InitialValue Class="CodeValue">
-							<Code><![CDATA[true]]></Code>
+							<Code><![CDATA[false]]></Code>
 						</InitialValue>
 					</Properties>
 				</Variable>
@@ -875,6 +876,21 @@ startTimeInModel = time();
 						</InitialValue>
 					</Properties>
 				</Variable>
+				<Variable Class="PlainVariable">
+					<Id>1647242786771</Id>
+					<Name><![CDATA[relocationTime]]></Name>
+					<X>110</X><Y>4530</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+						<Type><![CDATA[int]]></Type>        
+						<InitialValue Class="CodeValue">
+							<Code><![CDATA[0]]></Code>
+						</InitialValue>
+					</Properties>
+				</Variable>
 				<Variable Class="CollectionVariable">
 					<Id>1604475051553</Id>
 					<Name><![CDATA[yards]]></Name>
@@ -1003,7 +1019,7 @@ startTimeInModel = time();
 				<Connector>
 					<Id>1604920537201</Id>
 					<Name><![CDATA[connector18]]></Name>
-					<X>400</X><Y>4350</Y>
+					<X>410</X><Y>4350</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1030,13 +1046,13 @@ startTimeInModel = time();
 					</TargetConnectableItemReference>
 					<Points>
 						<Point><X>0</X><Y>0</Y></Point>
-						<Point><X>-30</X><Y>0</Y></Point>
+						<Point><X>-50</X><Y>0</Y></Point>
 					</Points>
 				</Connector>
 				<Connector>
 					<Id>1604920537205</Id>
 					<Name><![CDATA[connector20]]></Name>
-					<X>920</X><Y>4350</Y>
+					<X>960</X><Y>4350</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1063,13 +1079,13 @@ startTimeInModel = time();
 					</TargetConnectableItemReference>
 					<Points>
 						<Point><X>0</X><Y>0</Y></Point>
-						<Point><X>-40</X><Y>0</Y></Point>
+						<Point><X>-80</X><Y>0</Y></Point>
 					</Points>
 				</Connector>
 				<Connector>
 					<Id>1604920537207</Id>
 					<Name><![CDATA[connector21]]></Name>
-					<X>960</X><Y>4350</Y>
+					<X>1000</X><Y>4350</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1096,8 +1112,11 @@ startTimeInModel = time();
 					</TargetConnectableItemReference>
 					<Points>
 						<Point><X>0</X><Y>0</Y></Point>
-						<Point><X>40</X><Y>0</Y></Point>
-						<Point><X>40</X><Y>-110</Y></Point>
+						<Point><X>0</X><Y>0</Y></Point>
+						<Point><X>60</X><Y>0</Y></Point>
+						<Point><X>60</X><Y>-60</Y></Point>
+						<Point><X>0</X><Y>-60</Y></Point>
+						<Point><X>0</X><Y>-110</Y></Point>
 					</Points>
 				</Connector>
 				<Connector>
@@ -1236,7 +1255,7 @@ startTimeInModel = time();
 				<Connector>
 					<Id>1604920537235</Id>
 					<Name><![CDATA[connector22]]></Name>
-					<X>2270</X><Y>4340</Y>
+					<X>2220</X><Y>4340</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1263,40 +1282,7 @@ startTimeInModel = time();
 					</TargetConnectableItemReference>
 					<Points>
 						<Point><X>0</X><Y>0</Y></Point>
-						<Point><X>-230</X><Y>0</Y></Point>
-					</Points>
-				</Connector>
-				<Connector>
-					<Id>1604920537237</Id>
-					<Name><![CDATA[connector23]]></Name>
-					<X>2360</X><Y>4340</Y>
-					<Label><X>10</X><Y>0</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>false</ShowLabel>
-					<SourceEmbeddedObjectReference>
-						<PackageName><![CDATA[simplifiedSimulator]]></PackageName>
-						<ClassName><![CDATA[Main]]></ClassName>
-						<ItemName><![CDATA[exit1]]></ItemName>
-					</SourceEmbeddedObjectReference>
-					<SourceConnectableItemReference>
-						<PackageName><![CDATA[com.anylogic.libraries.processmodeling]]></PackageName>
-						<ClassName><![CDATA[Exit]]></ClassName>
-						<ItemName><![CDATA[in]]></ItemName>
-					</SourceConnectableItemReference>
-					<TargetEmbeddedObjectReference>
-						<PackageName><![CDATA[simplifiedSimulator]]></PackageName>
-						<ClassName><![CDATA[Main]]></ClassName>
-						<ItemName><![CDATA[queue2]]></ItemName>
-					</TargetEmbeddedObjectReference>
-					<TargetConnectableItemReference>
-						<PackageName><![CDATA[com.anylogic.libraries.processmodeling]]></PackageName>
-						<ClassName><![CDATA[Queue]]></ClassName>
-						<ItemName><![CDATA[out]]></ItemName>
-					</TargetConnectableItemReference>
-					<Points>
-						<Point><X>0</X><Y>0</Y></Point>
-						<Point><X>-50</X><Y>0</Y></Point>
+						<Point><X>-180</X><Y>0</Y></Point>
 					</Points>
 				</Connector>
 				<Connector>
@@ -1335,7 +1321,7 @@ startTimeInModel = time();
 				<Connector>
 					<Id>1605089280861</Id>
 					<Name><![CDATA[connector9]]></Name>
-					<X>2390</X><Y>4230</Y>
+					<X>2330</X><Y>4230</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1362,7 +1348,7 @@ startTimeInModel = time();
 					</TargetConnectableItemReference>
 					<Points>
 						<Point><X>0</X><Y>0</Y></Point>
-						<Point><X>-390</X><Y>0</Y></Point>
+						<Point><X>-330</X><Y>0</Y></Point>
 					</Points>
 				</Connector>
 				<Connector>
@@ -1529,7 +1515,7 @@ startTimeInModel = time();
 					<Points>
 						<Point><X>0</X><Y>0</Y></Point>
 						<Point><X>180</X><Y>0</Y></Point>
-						<Point><X>230</X><Y>-100</Y></Point>
+						<Point><X>180</X><Y>-100</Y></Point>
 					</Points>
 				</Connector>
 				<Connector>
@@ -1595,13 +1581,13 @@ startTimeInModel = time();
 					</TargetConnectableItemReference>
 					<Points>
 						<Point><X>0</X><Y>0</Y></Point>
-						<Point><X>-350</X><Y>0</Y></Point>
+						<Point><X>-310</X><Y>0</Y></Point>
 					</Points>
 				</Connector>
 				<Connector>
 					<Id>1605351072946</Id>
 					<Name><![CDATA[connector31]]></Name>
-					<X>470</X><Y>4350</Y>
+					<X>510</X><Y>4350</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1628,13 +1614,13 @@ startTimeInModel = time();
 					</TargetConnectableItemReference>
 					<Points>
 						<Point><X>0</X><Y>0</Y></Point>
-						<Point><X>-30</X><Y>0</Y></Point>
+						<Point><X>-60</X><Y>0</Y></Point>
 					</Points>
 				</Connector>
 				<Connector>
 					<Id>1605351103949</Id>
 					<Name><![CDATA[connector32]]></Name>
-					<X>480</X><Y>4360</Y>
+					<X>520</X><Y>4360</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -1661,8 +1647,9 @@ startTimeInModel = time();
 					</TargetConnectableItemReference>
 					<Points>
 						<Point><X>0</X><Y>0</Y></Point>
-						<Point><X>0</X><Y>90</Y></Point>
-						<Point><X>30</X><Y>90</Y></Point>
+						<Point><X>-40</X><Y>40</Y></Point>
+						<Point><X>-40</X><Y>90</Y></Point>
+						<Point><X>-10</X><Y>90</Y></Point>
 					</Points>
 				</Connector>
 				<Connector>
@@ -1731,8 +1718,8 @@ startTimeInModel = time();
 						<Point><X>0</X><Y>0</Y></Point>
 						<Point><X>50</X><Y>0</Y></Point>
 						<Point><X>50</X><Y>60</Y></Point>
-						<Point><X>-210</X><Y>60</Y></Point>
-						<Point><X>-210</X><Y>-230</Y></Point>
+						<Point><X>-200</X><Y>60</Y></Point>
+						<Point><X>-200</X><Y>-230</Y></Point>
 					</Points>
 				</Connector>
 				<Connector>
@@ -1968,7 +1955,7 @@ startTimeInModel = time();
 					</TargetConnectableItemReference>
 					<Points>
 						<Point><X>0</X><Y>0</Y></Point>
-						<Point><X>-60</X><Y>0</Y></Point>
+						<Point><X>-80</X><Y>0</Y></Point>
 					</Points>
 				</Connector>
 				<Connector>
@@ -2113,7 +2100,7 @@ startTimeInModel = time();
 				<Connector>
 					<Id>1605942546979</Id>
 					<Name><![CDATA[connector45]]></Name>
-					<X>2400</X><Y>4240</Y>
+					<X>2340</X><Y>4240</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -2141,12 +2128,12 @@ startTimeInModel = time();
 					<Points>
 						<Point><X>0</X><Y>0</Y></Point>
 						<Point><X>0</X><Y>330</Y></Point>
-						<Point><X>-1140</X><Y>330</Y></Point>
-						<Point><X>-1140</X><Y>10</Y></Point>
-						<Point><X>-1160</X><Y>-10</Y></Point>
-						<Point><X>-1140</X><Y>-30</Y></Point>
-						<Point><X>-1140</X><Y>-150</Y></Point>
-						<Point><X>-1120</X><Y>-150</Y></Point>
+						<Point><X>-1080</X><Y>330</Y></Point>
+						<Point><X>-1080</X><Y>10</Y></Point>
+						<Point><X>-1100</X><Y>-10</Y></Point>
+						<Point><X>-1080</X><Y>-30</Y></Point>
+						<Point><X>-1080</X><Y>-150</Y></Point>
+						<Point><X>-1060</X><Y>-150</Y></Point>
 					</Points>
 				</Connector>
 				<Connector>
@@ -2252,7 +2239,7 @@ startTimeInModel = time();
 				<Connector>
 					<Id>1607604641894</Id>
 					<Name><![CDATA[connector49]]></Name>
-					<X>1450</X><Y>4230</Y>
+					<X>1430</X><Y>4230</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -2279,7 +2266,7 @@ startTimeInModel = time();
 					</TargetConnectableItemReference>
 					<Points>
 						<Point><X>0</X><Y>0</Y></Point>
-						<Point><X>-70</X><Y>0</Y></Point>
+						<Point><X>-50</X><Y>0</Y></Point>
 					</Points>
 				</Connector>
 				<Connector>
@@ -2723,7 +2710,7 @@ startTimeInModel = time();
 				<Connector>
 					<Id>1626425182860</Id>
 					<Name><![CDATA[connector10]]></Name>
-					<X>2410</X><Y>4230</Y>
+					<X>2350</X><Y>4230</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -2750,13 +2737,13 @@ startTimeInModel = time();
 					</TargetConnectableItemReference>
 					<Points>
 						<Point><X>0</X><Y>0</Y></Point>
-						<Point><X>60</X><Y>0</Y></Point>
+						<Point><X>50</X><Y>0</Y></Point>
 					</Points>
 				</Connector>
 				<Connector>
 					<Id>1626425182861</Id>
 					<Name><![CDATA[connector61]]></Name>
-					<X>2490</X><Y>4230</Y>
+					<X>2420</X><Y>4230</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -2783,16 +2770,16 @@ startTimeInModel = time();
 					</TargetConnectableItemReference>
 					<Points>
 						<Point><X>0</X><Y>0</Y></Point>
-						<Point><X>100</X><Y>0</Y></Point>
-						<Point><X>100</X><Y>-230</Y></Point>
-						<Point><X>-2300</X><Y>-230</Y></Point>
-						<Point><X>-2300</X><Y>0</Y></Point>
+						<Point><X>30</X><Y>0</Y></Point>
+						<Point><X>30</X><Y>-230</Y></Point>
+						<Point><X>-2230</X><Y>-230</Y></Point>
+						<Point><X>-2230</X><Y>0</Y></Point>
 					</Points>
 				</Connector>
 				<Connector>
 					<Id>1626425234178</Id>
 					<Name><![CDATA[connector62]]></Name>
-					<X>2540</X><Y>4370</Y>
+					<X>2380</X><Y>4370</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -2819,14 +2806,16 @@ startTimeInModel = time();
 					</TargetConnectableItemReference>
 					<Points>
 						<Point><X>0</X><Y>0</Y></Point>
-						<Point><X>-60</X><Y>0</Y></Point>
-						<Point><X>-60</X><Y>-130</Y></Point>
+						<Point><X>-20</X><Y>0</Y></Point>
+						<Point><X>-20</X><Y>-100</Y></Point>
+						<Point><X>30</X><Y>-100</Y></Point>
+						<Point><X>30</X><Y>-130</Y></Point>
 					</Points>
 				</Connector>
 				<Connector>
 					<Id>1626425240843</Id>
 					<Name><![CDATA[connector63]]></Name>
-					<X>2640</X><Y>4370</Y>
+					<X>2460</X><Y>4370</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -2853,7 +2842,7 @@ startTimeInModel = time();
 					</TargetConnectableItemReference>
 					<Points>
 						<Point><X>0</X><Y>0</Y></Point>
-						<Point><X>-60</X><Y>0</Y></Point>
+						<Point><X>-40</X><Y>0</Y></Point>
 					</Points>
 				</Connector>
 				<Connector>
@@ -3291,6 +3280,43 @@ startTimeInModel = time();
 					<Points>
 						<Point><X>0</X><Y>0</Y></Point>
 						<Point><X>-90</X><Y>0</Y></Point>
+					</Points>
+				</Connector>
+				<Connector>
+					<Id>1633469185034</Id>
+					<Name><![CDATA[connector52]]></Name>
+					<X>410</X><Y>4350</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>false</ShowLabel>
+					<SourceEmbeddedObjectReference>
+						<PackageName><![CDATA[simplifiedSimulator]]></PackageName>
+						<ClassName><![CDATA[Main]]></ClassName>
+						<ItemName><![CDATA[delay1]]></ItemName>
+					</SourceEmbeddedObjectReference>
+					<SourceConnectableItemReference>
+						<PackageName><![CDATA[com.anylogic.libraries.processmodeling]]></PackageName>
+						<ClassName><![CDATA[Delay]]></ClassName>
+						<ItemName><![CDATA[in]]></ItemName>
+					</SourceConnectableItemReference>
+					<TargetEmbeddedObjectReference>
+						<PackageName><![CDATA[simplifiedSimulator]]></PackageName>
+						<ClassName><![CDATA[Main]]></ClassName>
+						<ItemName><![CDATA[queue2]]></ItemName>
+					</TargetEmbeddedObjectReference>
+					<TargetConnectableItemReference>
+						<PackageName><![CDATA[com.anylogic.libraries.processmodeling]]></PackageName>
+						<ClassName><![CDATA[Queue]]></ClassName>
+						<ItemName><![CDATA[out]]></ItemName>
+					</TargetConnectableItemReference>
+					<Points>
+						<Point><X>0</X><Y>0</Y></Point>
+						<Point><X>-50</X><Y>50</Y></Point>
+						<Point><X>-50</X><Y>430</Y></Point>
+						<Point><X>1890</X><Y>430</Y></Point>
+						<Point><X>1890</X><Y>-10</Y></Point>
+						<Point><X>1850</X><Y>-10</Y></Point>
 					</Points>
 				</Connector>
 			</Connectors>
@@ -4207,9 +4233,9 @@ for(int i=0;i<toBeLoaded20Containers.size() - 1;i+=2){
 	c1.task = t;
 	c2.task = t;
 	
-	if (c1.source != c2.source){
-		System.out.println("Double Container Source Mismatch");
-	}
+	//if (c1.source != c2.source){
+	//	System.out.println("Double Container Source Mismatch");
+	//}
 	/*
 	// add to the yard task list
 	Yard y = (Yard)c1.source;
@@ -4484,17 +4510,9 @@ int actionByAI;
 if (usePRTT){
 	actionByAI = PRTT(truck)[0];
 } else {
-	if(state.portNum == 0){
+	
 		actionByAI = env.getRandomAction(state, fixRandom, R);
-	}else{
-		try{
-			actionByAI = env.getAction(state, fixRandom,  R);
-		} catch (IOException | JSONException e) {
-			e.printStackTrace();
-			actionByAI = -1;
-			System.exit(-1);
-		} 
-	}
+
 }
 
 
@@ -4805,21 +4823,7 @@ if(!yard.craneBusy){
 	
 	
 	for (Truck t : trucks){
-		/*
-		if(qc.currentTaskList.size() == 0){
-			System.out.println("-----------------------------------------------");
-			System.out.println("Source QC "+qc.index+" Task List Empty: ");
-			System.out.println("Queuing Trucks: " + trucks.size());
-			System.out.println("Task Undispatched: "+qc.taskRemain);
-			System.out.println("QC Remove Count: "+qc.removeCount);
-			
-			System.out.println("Trucks:");
-			for (Truck truck : trucks){
-				System.out.println(truck.id);
-			}
-		}
-		*/
-		
+	/*
 		if(t.task == qc.currentTaskList.get(0)){
 			qc.completedTaskList.add(qc.currentTaskList.get(0));
 			qc.currentTaskList.remove(0);
@@ -4829,6 +4833,7 @@ if(!yard.craneBusy){
 				if (checkDelayContainTruck(queueDelay, t)){
 					queueDelay.stopDelay(t);
 				} else {
+					System.out.println("queueSourceCraneSceduler Error");
 					System.out.println("queueDelay fail to contain truck "+t.id+ " "+qc.name);
 					System.out.println("Truck's current flow block: "+t.currentBlock().getName());
 					System.exit(-1);
@@ -4838,7 +4843,28 @@ if(!yard.craneBusy){
 			}
 			
 			break;
+		}*/
+		
+		if((t.task.source2 == null)||(t.task.isSecondSourceOnGoing)){
+			qc.completedTaskList.add(t.task);
+			qc.currentTaskList.remove(t.task);
 		}
+		qc.craneBusy = true;
+		
+		if (ifCheckDelay){
+			if (checkDelayContainTruck(queueDelay, t)){
+				queueDelay.stopDelay(t);
+			} else {
+				System.out.println("queueSourceCraneSceduler Error");
+				System.out.println("queueDelay fail to contain truck "+t.id+ " "+qc.name);
+				System.out.println("Truck's current flow block: "+t.currentBlock().getName());
+				System.exit(-1);
+			}	
+		} else {
+			queueDelay.stopDelay(t);
+		}
+			
+		break;
 	}
 }
 
@@ -5291,7 +5317,8 @@ if(!yard.craneBusy){
 						<Name><![CDATA[qc]]></Name>
 						<Type><![CDATA[QueyCrane]]></Type>
 					</Parameter>
-					<Body><![CDATA[if (!qc.craneBusy){	
+					<Body><![CDATA[// executing a task by finding a truck
+if (!qc.craneBusy){	
 	LinkedList<Truck> trucks = qc.queuingTrucks;
 	
 	// random policy
@@ -5300,52 +5327,27 @@ if(!yard.craneBusy){
 	
 	 
 	for (Truck t : trucks){
-		/*
-		if(qc.currentTaskList.size() == 0){
-			System.out.println("----------------------------------------------------");
-			System.out.println("Destination QC "+qc.index+" Task List Empty: ");
-			System.out.println("Queuing Trucks: "+trucks.size());
-			System.out.println("Task Undispatched: "+qc.taskRemain);
-			System.out.println("QC Remove Count: "+qc.removeCount);
-			
-			System.out.println("Trucks");
-			for (Truck truck: trucks){
-				System.out.println(truck.id);
-			}
+		if((t.task.destination2 == null)||(t.task.isSecondDestinationOnGoing)){
+			qc.completedTaskList.add(t.task);
+			qc.currentTaskList.remove(t.task);
 		}
-		*/
+		qc.craneBusy = true;
 		
-		if (t.task == qc.currentTaskList.get(0)){
-			qc.completedTaskList.add(qc.currentTaskList.get(0));
-			qc.currentTaskList.remove(0);
-			qc.craneBusy = true;
-			
-			if(ifCheckDelay){
+		if(ifCheckDelay){
 				
-				if (checkDelayContainTruck(queueDelay2, t)){
-					queueDelay2.stopDelay(t);
-				} else {
-					System.out.println("queueDelay2 fail to contain truck "+ t.id+" "+qc.name);
-					System.out.println("Truck's current flow block: "+t.currentBlock().getName());
-					System.exit(-1);
-				}
-				/*
-				while(!checkDelayContainTruck(queueDelay2, t)){
-					System.out.println("Berth Crane Wait");
-				}
+			if (checkDelayContainTruck(queueDelay2, t)){
 				queueDelay2.stopDelay(t);
-				*/
 			} else {
-				/*
-				while(!checkDelayContainTruck(queueDelay2, t)){
-					System.out.println("Berth Crane Wait");
-				}*/
-				queueDelay2.stopDelay(t);
+				System.out.println("queueDesCraneSceduler Error");
+				System.out.println("queueDelay2 fail to contain truck "+ t.id+" "+qc.name);
+				System.out.println("Truck's current flow block: "+t.currentBlock().getName());
+				System.exit(-1);
 			}
-			
-			break;
+		} else {
+			queueDelay2.stopDelay(t);
 		}
 		
+		break;
 	}
 	
 	
@@ -5431,7 +5433,8 @@ return true;]]></Body>
 						<Name><![CDATA[c]]></Name>
 						<Type><![CDATA[Container]]></Type>
 					</Parameter>
-					<Body><![CDATA[Yard y  = (Yard)agent2source(c);
+					<Body><![CDATA[//Yard y  = (Yard)agent2source(c);
+Yard y = (Yard)c.currentLocation;
 
 if (c.size == 40){
 	return y.blockArea.getX() + y.relocatedBay * containerLength;
@@ -5464,7 +5467,8 @@ if (c.size == 40){
 						<Name><![CDATA[c]]></Name>
 						<Type><![CDATA[Container]]></Type>
 					</Parameter>
-					<Body><![CDATA[Yard y  = (Yard)agent2source(c);
+					<Body><![CDATA[//Yard y  = (Yard)agent2source(c);
+Yard y = (Yard)c.currentLocation;
 return y.blockArea.getY() + y.relocatedStack * containerWidth;
 ]]></Body>
 				</Function>
@@ -5482,7 +5486,8 @@ return y.blockArea.getY() + y.relocatedStack * containerWidth;
 						<Name><![CDATA[c]]></Name>
 						<Type><![CDATA[Container]]></Type>
 					</Parameter>
-					<Body><![CDATA[Yard y  = (Yard)agent2source(c);
+					<Body><![CDATA[//Yard y  = (Yard)agent2source(c);
+Yard y = (Yard)c.currentLocation;
 
 return  y.relocatedLayer * containerHeight;
 ]]></Body>
@@ -5547,7 +5552,10 @@ if (truckExitAmount == trucks.size()){
 	state.updateTruckDispatchingState(truck, network1);
 	state.isDone = true;
 	try{
+		//Observation observation = new Observation(agent,relocationTime,taskIndex);    
+		
 		env.getAction(state, fixRandom,  R);
+		//env.endEpisode();
 	} catch (IOException | JSONException e) {
 		e.printStackTrace();
 		System.exit(-1);
@@ -5591,7 +5599,7 @@ if (truckExitAmount == trucks.size()){
 					<ReturnType><![CDATA[boolean]]></ReturnType>
 					<Id>1605942965220</Id>
 					<Name><![CDATA[ifDoubleDestination]]></Name>
-					<X>2380</X><Y>4170</Y>
+					<X>2320</X><Y>4120</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -5668,11 +5676,21 @@ return true;]]></Body>
 						<Name><![CDATA[c]]></Name>
 						<Type><![CDATA[Container]]></Type>
 					</Parameter>
-					<Body><![CDATA[if (!c.task.isSecondSourceOnGoing){
-	return c.task.source;
-} else {
-	return c.task.source2;
-}]]></Body>
+					<Body><![CDATA[
+
+try{
+	if (!c.task.isSecondSourceOnGoing){
+		return c.task.source;
+	} else {
+		return c.task.source2;
+	}
+}catch(NullPointerException e){
+	System.out.println(c == null);
+	System.out.println(c.task == null);
+	System.exit(-1);
+}
+return null;
+]]></Body>
 				</Function>
 				<Function AccessType="default" StaticFunction="false">
 					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
@@ -6555,7 +6573,7 @@ if(currentTime >= time){
 					<ReturnType><![CDATA[boolean]]></ReturnType>
 					<Id>1632066123838</Id>
 					<Name><![CDATA[ifDoubleFinished]]></Name>
-					<X>1360</X><Y>4030</Y>
+					<X>1420</X><Y>4030</Y>
 					<Label><X>10</X><Y>0</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -6620,7 +6638,16 @@ if (yard.queuingTrucks.size() == 0){
 					<Body><![CDATA[if(!yard.craneBusy){
 	LinkedList<Truck> trucks = yard.queuingTrucks;
 	
+	// update state
+	state.updateYardCraneSchedulingState(yard);
+	
 	Truck t = trucks.get(0);
+	if(t == null){
+		System.out.println(t == null);
+		System.exit(-1);
+	}
+	yard.craneBusy = true;
+	//System.out.println(yard.craneBusy);
 	
 	if(t.taskType){
 		if (ifCheckDelay){
@@ -6628,6 +6655,7 @@ if (yard.queuingTrucks.size() == 0){
 				yard.craneBusy = true;
 				queueDelay.stopDelay(t);
 			} else {
+				System.out.println("yardCraneSceduler Error");
 				System.out.println("queueDelay fail to contain truck "+t.id+" "+yard.name);
 				System.out.println("Truck's current flow block: "+t.currentBlock().getName());
 				System.exit(-1);
@@ -6640,16 +6668,44 @@ if (yard.queuingTrucks.size() == 0){
 			if(checkDelayContainTruck(queueDelay2, t)){
 				yard.craneBusy = true;
 				queueDelay2.stopDelay(t);
+				//System.out.println("yardCraneScheduler realsed queueDelay2");
 			} else {
+				System.out.println("yardCraneSceduler Error");
 				System.out.println("queueDelay2 fail to contain truck, Dispatch Task "+t.id+ " "+yard.name);
 				System.out.println("Truck's current flow block: "+t.currentBlock().getName());
 				System.exit(-1);
 			}
 		} else {
 			queueDelay2.stopDelay(t);
+			//System.out.println("yardCraneScheduler realsed queueDelay2 else");
 		}
 	}
+	//System.out.println("Truck Released to Operation");
 }
+/*
+else{
+	//System.out.println("Denied");
+}*/
+]]></Body>
+				</Function>
+				<Function AccessType="default" StaticFunction="false">
+					<ReturnModificator>RETURNS_VALUE</ReturnModificator>
+					<ReturnType><![CDATA[OverheadCrane]]></ReturnType>
+					<Id>1633499021180</Id>
+					<Name><![CDATA[getCurrentCrane]]></Name>
+					<X>690</X><Y>4640</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Parameter>
+						<Name><![CDATA[agent]]></Name>
+						<Type><![CDATA[Agent]]></Type>
+					</Parameter>
+					<Body><![CDATA[Container c = (Container)agent;
+Location source = c.currentLocation;
+Yard y = (Yard)source;
+return y.crane;
 ]]></Body>
 				</Function>
 			</Functions>
@@ -6883,20 +6939,26 @@ if (!agent.task.isSecondSourceOnGoing){
 }
 
 //if(agent.innerType){
-	if (outTruckFleet instanceof Yard){
-		Yard y = (Yard)outTruckFleet;
+if (outTruckFleet instanceof Yard){
+	Yard y = (Yard)outTruckFleet;
+
+	y.headingTrucks.remove(agent);
+	y.queuingTrucks.add(agent);
+	//System.out.println("Added Truck: " + agent.idString);
 	
-		y.headingTrucks.remove(agent);
-		y.queuingTrucks.add(agent);
-		
+	yardCraneScheduler(y);
+	/*
+	if(y.acceptable){
 		yardCraneScheduler(y); //maybe problem, 
-	
-	} else if (outTruckFleet instanceof Berth){
-		Berth b = (Berth)outTruckFleet;
-		agent.task.sourceCrane.queuingTrucks.add(agent);
-		agent.task.sourceCrane.headingTruckAmount--;
-		queySourceCraneScheduler(agent.task.sourceCrane);
-	}
+		y.acceptable = false;
+	}*/
+
+} else if (outTruckFleet instanceof Berth){
+	Berth b = (Berth)outTruckFleet;
+	agent.task.sourceCrane.queuingTrucks.add(agent);
+	agent.task.sourceCrane.headingTruckAmount--;
+	queySourceCraneScheduler(agent.task.sourceCrane);
+}
 //}else{
 	
 //}
@@ -7062,7 +7124,7 @@ if (!agent.task.isSecondSourceOnGoing){
 				<EmbeddedObject>
 					<Id>1604920537105</Id>
 					<Name><![CDATA[enter7]]></Name>
-					<X>350</X><Y>4340</Y>
+					<X>340</X><Y>4340</Y>
 					<Label><X>-5</X><Y>-15</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7153,6 +7215,10 @@ if (!agent.task.isSecondSourceOnGoing){
 						</Parameter>
 						<Parameter>
 							<Name><![CDATA[onEnter]]></Name>
+							<Value Class="CodeValue">
+								<Code><![CDATA[Container c = (Container)agent;
+c.currentLocation = c.source;]]></Code>
+							</Value>
 						</Parameter>
 						<Parameter>
 							<Name><![CDATA[onRemove]]></Name>
@@ -7204,7 +7270,7 @@ if (!agent.task.isSecondSourceOnGoing){
 					<Id>1604920537109</Id>
 					<Name><![CDATA[delay1]]></Name>
 					<Description><![CDATA[every container strck here]]></Description>
-					<X>400</X><Y>4330</Y>
+					<X>410</X><Y>4330</Y>
 					<Label><X>0</X><Y>-15</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7438,7 +7504,14 @@ if (!agent.task.isSecondSourceOnGoing){
 						<Parameter>
 							<Name><![CDATA[onExit]]></Name>
 							<Value Class="CodeValue">
-								<Code><![CDATA[Location outTruckFleet = agent.task.source;
+								<Code><![CDATA[Location outTruckFleet;
+if(agent.task.isSecondSourceOnGoing){
+	outTruckFleet = agent.task.source2;
+}else{
+	outTruckFleet = agent.task.source;
+}
+
+//Location outTruckFleet = agent.task.source;
 if (outTruckFleet instanceof Berth){
 	Berth b = (Berth)outTruckFleet;
 	
@@ -7471,9 +7544,7 @@ if (outTruckFleet instanceof Berth){
 		
 		crane.craneBusy = false;
 		// check if there are trucks in the queue 
-		if (crane.queuingTrucks.size() == 0){
-			;
-		}else {
+		if (crane.queuingTrucks.size() != 0){
 			queySourceCraneScheduler(crane);
 		}
 		
@@ -7495,8 +7566,7 @@ if (outTruckFleet instanceof Berth){
 	Yard y = (Yard)outTruckFleet;
 	//System.out.println(yards.get(81).block.get(new TwoDPoint(2,1)).containerPiles.get(1) == null);
 	try{
-	y.block.get(new TwoDPoint(agent.bay, agent.stack)).containerPiles.get(agent.pile0or1).pop();
-	
+		y.block.get(new TwoDPoint(agent.bay, agent.stack)).containerPiles.get(agent.pile0or1).pop();
 	}
 	catch(Exception e){
 		System.out.println("bay: " + agent.bay + 
@@ -7512,15 +7582,28 @@ if (outTruckFleet instanceof Berth){
 	if (!(agent.task.sameSource && !agent.task.isSecondSourceOnGoing)){
 	
 		//and remove the truck from the waiting queue
+		//System.out.println("Queue length: " + y.queuingTrucks.size() + "Contain: " + y.queuingTrucks.contains(agent.task.truck));
 		y.queuingTrucks.remove(agent.task.truck);
+		//System.out.println("Remove Truck:" + agent.task.truck.idString);
+		//System.out.println("Queue length: " + y.queuingTrucks.size() + "Contain: " + y.queuingTrucks.contains(agent.task.truck));
 		
 		y.craneBusy = false;
+		//System.out.println(y.craneBusy);
 		// check if there are trucks queuing
+		/*
 		if (y.queuingTrucks.size() == 0){
-			;
+			y.acceptable = true;
 		}else {
 			yardCraneScheduler(y);
+		}*/
+		
+		if(y.queuingTrucks.size() != 0){
+			yardCraneScheduler(y);
 		}
+		/*
+		else{
+			System.out.println("empty queue");
+		}*/
 		
 		// update crane bay position
 		y.craneBayPosition = agent.bay;
@@ -7592,7 +7675,7 @@ if (outTruckFleet instanceof Berth){
 				<EmbeddedObject>
 					<Id>1604920537118</Id>
 					<Name><![CDATA[queue]]></Name>
-					<X>920</X><Y>4330</Y>
+					<X>960</X><Y>4330</Y>
 					<Label><X>-5</X><Y>-15</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -7915,12 +7998,10 @@ if (outTruckFleet instanceof Berth){
 						<Parameter>
 							<Name><![CDATA[onAtExit]]></Name>
 							<Value Class="CodeValue">
-								<Code><![CDATA[//getEngine().pause();
-
-Task t = truckDispatch(agent);
-if(t.destination2!= null){
-	System.out.println("\n\n--20--\n\n");
-}
+								<Code><![CDATA[Task t = truckDispatch(agent);
+//if(t.destination2!= null){
+//	System.out.println("\n\n--20--\n\n");
+//}
 agent.task = t;
 t.truck = agent;
 
@@ -7955,9 +8036,7 @@ if (ifShowInfo){
 	System.out.println("Target Coordinate: ("+getSourceBayStopline(agent).x+" "+getSourceBayStopline(agent).y+")"+" ("
 						+getDestinationBayStopline(agent).x+" "+getDestinationBayStopline(agent).y+")");
 	System.out.println("Dispatch to: Truck "+agent.id);
-}
-
-]]></Code>
+}]]></Code>
 							</Value>
 						</Parameter>
 						<Parameter>
@@ -8190,7 +8269,14 @@ if (des instanceof Yard){
 	Yard y = (Yard)des;
 	y.headingTrucks.remove(agent);
 	y.queuingTrucks.add(agent);
+	//System.out.println("Added Truck: " + agent.idString + " in Yard: " + y.id);
+	
 	yardCraneScheduler(y);
+	/*
+	if(y.acceptable){
+		yardCraneScheduler(y); //maybe problem, 
+		y.acceptable = false;
+	}*/
 	
 } else if (des instanceof Berth){
 	Berth b = (Berth)des;
@@ -8254,7 +8340,7 @@ if (des instanceof Yard){
 				<EmbeddedObject>
 					<Id>1604920537159</Id>
 					<Name><![CDATA[if2Des]]></Name>
-					<X>2380</X><Y>4220</Y>
+					<X>2320</X><Y>4220</Y>
 					<Label><X>-30</X><Y>-20</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -8312,9 +8398,6 @@ if (des instanceof Yard){
 						</Parameter>
 						<Parameter>
 							<Name><![CDATA[onExitFalse]]></Name>
-							<Value Class="CodeValue">
-								<Code><![CDATA[agent.task.isSecondDestinationOnGoing = true;]]></Code>
-							</Value>
 						</Parameter>
 					</Parameters>
 					<ReplicationFlag>false</ReplicationFlag>
@@ -8602,6 +8685,9 @@ if (des instanceof Yard){
 						</Parameter>
 						<Parameter>
 							<Name><![CDATA[onExit]]></Name>
+							<Value Class="CodeValue">
+								<Code><![CDATA[agent.currentLocation = agent.destination;]]></Code>
+							</Value>
 						</Parameter>
 						<Parameter>
 							<Name><![CDATA[onExitTimeout]]></Name>
@@ -8800,18 +8886,19 @@ if (ifCheckDelay){
 							<Name><![CDATA[onExit]]></Name>
 							<Value Class="CodeValue">
 								<Code><![CDATA[
-if (!(agent.task.sameDestination && !agent.task.isSecondSourceOnGoing)){
+if (!(agent.task.sameDestination && !agent.task.isSecondDestinationOnGoing)){
 	QueyCrane crane = agent.task.desCrane;
 	
 	//and remove the truck from the waiting queue
 	crane.queuingTrucks.remove(agent.task.truck);
 	
+	//finishing executing tasks
 	crane.craneBusy = false; 
+	
 	// check if there are trucks queuing 
-	if (crane.queuingTrucks.size() == 0){
-		;
-	}else {
-		queyDestinationCraneScheduler(crane);
+	if (crane.queuingTrucks.size() != 0){
+		queyDestinationCraneScheduler(crane); 
+		// need to add a condition that checks the second container
 	}
 
 	// update crane position
@@ -8878,8 +8965,8 @@ qc.timeTracker = time(SECOND);
 				<EmbeddedObject>
 					<Id>1604920537177</Id>
 					<Name><![CDATA[queue2]]></Name>
-					<X>2270</X><Y>4320</Y>
-					<Label><X>-5</X><Y>-15</Y></Label>
+					<X>2220</X><Y>4320</Y>
+					<Label><X>15</X><Y>-10</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
@@ -8939,6 +9026,10 @@ qc.timeTracker = time(SECOND);
 						</Parameter>
 						<Parameter>
 							<Name><![CDATA[onExit]]></Name>
+							<Value Class="CodeValue">
+								<Code><![CDATA[agent.readyToUnload = false;
+agent.readyToDropOff = false;]]></Code>
+							</Value>
 						</Parameter>
 						<Parameter>
 							<Name><![CDATA[onExitTimeout]]></Name>
@@ -8948,69 +9039,6 @@ qc.timeTracker = time(SECOND);
 						</Parameter>
 						<Parameter>
 							<Name><![CDATA[onRemove]]></Name>
-						</Parameter>
-					</Parameters>
-					<ReplicationFlag>false</ReplicationFlag>
-					<Replication Class="CodeValue">
-						<Code><![CDATA[100]]></Code>
-					</Replication>
-					<CollectionType>ARRAY_LIST_BASED</CollectionType>
-					<InitialLocationType>AT_ANIMATION_POSITION</InitialLocationType>
-					<XCode Class="CodeValue">
-						<Code><![CDATA[0]]></Code>
-					</XCode>
-					<YCode Class="CodeValue">
-						<Code><![CDATA[0]]></Code>
-					</YCode>
-					<ZCode Class="CodeValue">
-						<Code><![CDATA[0]]></Code>
-					</ZCode>
-					<ColumnCode Class="CodeValue">
-						<Code><![CDATA[0]]></Code>
-					</ColumnCode>
-					<RowCode Class="CodeValue">
-						<Code><![CDATA[0]]></Code>
-					</RowCode>
-					<LatitudeCode Class="CodeValue">
-						<Code><![CDATA[0]]></Code>
-					</LatitudeCode>
-					<LongitudeCode Class="CodeValue">
-						<Code><![CDATA[0]]></Code>
-					</LongitudeCode>
-					<LocationNameCode Class="CodeValue">
-						<Code><![CDATA[""]]></Code>
-					</LocationNameCode>
-					<InitializationType>SPECIFIED_NUMBER</InitializationType>
-					<InitializationDatabaseTableQuery>
-						<TableReference>
-						</TableReference>
-					</InitializationDatabaseTableQuery>
-					<InitializationDatabaseType>ONE_AGENT_PER_DATABASE_RECORD</InitializationDatabaseType>
-					<QuantityColumn>
-					</QuantityColumn>
-				</EmbeddedObject>
-				<EmbeddedObject>
-					<Id>1604920537182</Id>
-					<Name><![CDATA[exit1]]></Name>
-					<X>2360</X><Y>4330</Y>
-					<Label><X>-10</X><Y>-15</Y></Label>
-					<PublicFlag>false</PublicFlag>
-					<PresentationFlag>true</PresentationFlag>
-					<ShowLabel>true</ShowLabel>
-					<ActiveObjectClass>
-						<PackageName><![CDATA[com.anylogic.libraries.processmodeling]]></PackageName>
-						<ClassName><![CDATA[Exit]]></ClassName>
-					</ActiveObjectClass>
-					<GenericParameterSubstitute>
-						<GenericParameterSubstituteReference>
-							<PackageName><![CDATA[com.anylogic.libraries.processmodeling]]></PackageName>
-							<ClassName><![CDATA[Exit]]></ClassName>
-							<ItemName><![CDATA[1412336242934]]></ItemName>
-						</GenericParameterSubstituteReference>
-					</GenericParameterSubstitute>
-					<Parameters>
-						<Parameter>
-							<Name><![CDATA[onExit]]></Name>
 						</Parameter>
 					</Parameters>
 					<ReplicationFlag>false</ReplicationFlag>
@@ -9219,6 +9247,7 @@ agent.task.operationTime += time(SECOND) - agent.task.start;
 				<EmbeddedObject>
 					<Id>1605089278931</Id>
 					<Name><![CDATA[craneOperateDelay2]]></Name>
+					<Description><![CDATA[only in this stage could the truck relaese its containers]]></Description>
 					<X>1960</X><Y>4210</Y>
 					<Label><X>-40</X><Y>-15</Y></Label>
 					<PublicFlag>false</PublicFlag>
@@ -9319,6 +9348,7 @@ if (ifCheckDelay){
 }
 */
 
+// release the container
 delay.stopDelay(c);
 
 
@@ -9561,7 +9591,12 @@ pile.push(agent);
 						<Parameter>
 							<Name><![CDATA[onExitFalse]]></Name>
 							<Value Class="CodeValue">
-								<Code><![CDATA[Yard y = (Yard)agent.task.destination;
+								<Code><![CDATA[Yard y;
+if(agent.task.isSecondDestinationOnGoing){
+	y = (Yard)agent.task.destination2;
+}else{
+	y = (Yard)agent.task.destination;
+}
 Stack<Container> pile = y.block.get(new TwoDPoint(agent.task.desBay, agent.task.desStack)).containerPiles.get(agent.desPile0or1);
 
 // change container coordinate (bay, stack, layer)
@@ -9734,7 +9769,7 @@ pile.push(agent);
 						<Parameter>
 							<Name><![CDATA[onEnter]]></Name>
 							<Value Class="CodeValue">
-								<Code><![CDATA[
+								<Code><![CDATA[/*
 Truck t = agent.task.truck;
 if (ifCheckDelay){
 	if (checkDelayContainTruck(craneOperateDelay2, t)){
@@ -9747,7 +9782,7 @@ if (ifCheckDelay){
 } else {
 	craneOperateDelay2.stopDelay(t);
 }
-]]></Code>
+*/]]></Code>
 							</Value>
 						</Parameter>
 						<Parameter>
@@ -9756,18 +9791,39 @@ if (ifCheckDelay){
 						<Parameter>
 							<Name><![CDATA[onExit]]></Name>
 							<Value Class="CodeValue">
-								<Code><![CDATA[if (!(agent.task.sameDestination && !agent.task.isSecondSourceOnGoing)){
+								<Code><![CDATA[Truck t = agent.task.truck;
+if (ifCheckDelay){
+	if (checkDelayContainTruck(craneOperateDelay2, t)){
+		craneOperateDelay2.stopDelay(t);
+	} else {
+		System.out.println("queueDelay2 fail to contain truck "+ t.id);
+		System.out.println("Truck's current flow block: "+t.currentBlock().getName());
+		System.exit(-1);	
+	}
+} else {
+	craneOperateDelay2.stopDelay(t);
+}
 
-	Yard y = (Yard)agent.task.destination;
+if (!(agent.task.sameDestination && !agent.task.isSecondDestinationOnGoing)){
+
+	Yard y;
+	if(agent.task.isSecondDestinationOnGoing){
+		y = (Yard)agent.task.destination2;
+	}else{
+		y = (Yard)agent.task.destination;
+	}
+	//Yard y = (Yard)agent.task.destination;
 	
 	//and remove the truck from the waiting queue
+	//System.out.println("Yard: " + y.id);
+	//System.out.println("Queue length: " + y.queuingTrucks.size() + " Contain: " + y.queuingTrucks.contains(agent.task.truck));
 	y.queuingTrucks.remove(agent.task.truck);
+	//System.out.println("Remove Truck:" + agent.task.truck.idString);
+	//System.out.println("Queue length: " + y.queuingTrucks.size() + " Contain: " + y.queuingTrucks.contains(agent.task.truck));
 	
 	y.craneBusy = false;
 	// check if there are trucks queuing 
-	if (y.queuingTrucks.size() == 0){
-		;
-	}else {
+	if (y.queuingTrucks.size() != 0){
 		yardCraneScheduler(y);
 	}
 	
@@ -9899,9 +9955,6 @@ if (agent.task.isSecondDestinationOnGoing){
 						</Parameter>
 						<Parameter>
 							<Name><![CDATA[onExit]]></Name>
-							<Value Class="CodeValue">
-								<Code><![CDATA[agent.taskType = false;]]></Code>
-							</Value>
 						</Parameter>
 						<Parameter>
 							<Name><![CDATA[onRemove]]></Name>
@@ -9950,7 +10003,7 @@ if (agent.task.isSecondDestinationOnGoing){
 					<Id>1605351071427</Id>
 					<Name><![CDATA[ifBerth]]></Name>
 					<Description><![CDATA[berth or yard]]></Description>
-					<X>460</X><Y>4340</Y>
+					<X>500</X><Y>4340</Y>
 					<Label><X>-5</X><Y>-20</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -9976,7 +10029,7 @@ if (agent.task.isSecondDestinationOnGoing){
 						<Parameter>
 							<Name><![CDATA[condition]]></Name>
 							<Value Class="CodeValue">
-								<Code><![CDATA[agent2source(agent) instanceof Berth]]></Code>
+								<Code><![CDATA[(agent2source(agent) instanceof Berth) && (agent.currentLocation instanceof Berth)]]></Code>
 							</Value>
 						</Parameter>
 						<Parameter>
@@ -10148,7 +10201,7 @@ if (agent.task.isSecondDestinationOnGoing){
 						<Parameter>
 							<Name><![CDATA[crane]]></Name>
 							<Value Class="CodeValue">
-								<Code><![CDATA[getSourceCrane(agent)]]></Code>
+								<Code><![CDATA[getCurrentCrane(agent)]]></Code>
 							</Value>
 						</Parameter>
 						<Parameter>
@@ -10241,6 +10294,10 @@ if (agent.task.isSecondDestinationOnGoing){
 						</Parameter>
 						<Parameter>
 							<Name><![CDATA[onAtEnter]]></Name>
+							<Value Class="CodeValue">
+								<Code><![CDATA[//Yard y = (Yard)agent.currentLocation;
+//System.out.println("Yard: " + y.index);]]></Code>
+							</Value>
 						</Parameter>
 						<Parameter>
 							<Name><![CDATA[onCancelEnter]]></Name>
@@ -10271,7 +10328,7 @@ if (ifCheckDelay){
 }
 
 
-Yard y = (Yard)agent2source(agent);
+Yard y = (Yard)agent.currentLocation;
 y.relocationAmount++;
 
 
@@ -10468,12 +10525,42 @@ y.relocationAmount++;
 							<Name><![CDATA[onEnter]]></Name>
 							<Value Class="CodeValue">
 								<Code><![CDATA[Yard y = (Yard)agent2source(agent);
+// y.showBlockConfiguration();
+//System.out.println("relocating====");
 
-Container top = y.relocate(agent);
+
+
+int newStack;
+relocationTime += 1;
+try
+{
+    Observation observation = new Observation(agent,relocationTime,taskIndex);    
+    
+        
+    newStack = env.getAction(state,observation, fixRandom, R);
+    
+}
+catch (IOException | JSONException e)
+{
+    e.printStackTrace();
+    newStack = -1;
+    System.exit(-1);
+}
+
+
+
+
+Container top = y.relocate(agent, newStack);
+/*
+if(checkDelayContainContainer(delay1, top)){
+    delay1.stopDelay(top);
+}else{
+    delay6.stopDelay(top);
+}
+*/
 delay1.stopDelay(top);
 
-//System.out.println(top.bay+" " +top.stack+" "+top.layer);
-
+// System.out.println(top.bay+" " +top.stack+" "+top.layer);
 ]]></Code>
 							</Value>
 						</Parameter>
@@ -10744,9 +10831,15 @@ agent.task.container.source == agent.task.container2.source ]]></Code>
 						</Parameter>
 						<Parameter>
 							<Name><![CDATA[onExitTrue]]></Name>
+							<Value Class="CodeValue">
+								<Code><![CDATA[//System.out.println("Same Source Truck: "+agent.idString);]]></Code>
+							</Value>
 						</Parameter>
 						<Parameter>
 							<Name><![CDATA[onExitFalse]]></Name>
+							<Value Class="CodeValue">
+								<Code><![CDATA[//System.out.println("Different Source Truck: "+agent.idString);]]></Code>
+							</Value>
 						</Parameter>
 					</Parameters>
 					<ReplicationFlag>false</ReplicationFlag>
@@ -11423,7 +11516,7 @@ if (truckDes instanceof Yard){
 				<EmbeddedObject>
 					<Id>1607604641741</Id>
 					<Name><![CDATA[moveTo4]]></Name>
-					<X>1450</X><Y>4210</Y>
+					<X>1430</X><Y>4210</Y>
 					<Label><X>-10</X><Y>-15</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -11553,7 +11646,7 @@ if (compareDestination(agent)){
 						<Parameter>
 							<Name><![CDATA[onExit]]></Name>
 							<Value Class="CodeValue">
-								<Code><![CDATA[//if(!agent.innerType) System.out.println("move 4 out");]]></Code>
+								<Code><![CDATA[agent.taskType = false;]]></Code>
 							</Value>
 						</Parameter>
 						<Parameter>
@@ -12139,9 +12232,6 @@ if (compareDestination(agent)){
 						</Parameter>
 						<Parameter>
 							<Name><![CDATA[onExitFalse]]></Name>
-							<Value Class="CodeValue">
-								<Code><![CDATA[agent.task.isSecondSourceOnGoing = true;]]></Code>
-							</Value>
 						</Parameter>
 					</Parameters>
 					<ReplicationFlag>false</ReplicationFlag>
@@ -12256,7 +12346,7 @@ if (compareDestination(agent)){
 					<Id>1626423555091</Id>
 					<Name><![CDATA[dropoff1]]></Name>
 					<X>1310</X><Y>4650</Y>
-					<Label><X>-10</X><Y>-15</Y></Label>
+					<Label><X>-20</X><Y>-30</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
@@ -12353,7 +12443,7 @@ if (compareDestination(agent)){
 					<Id>1626423646138</Id>
 					<Name><![CDATA[outTruckSink]]></Name>
 					<X>1390</X><Y>4660</Y>
-					<Label><X>-10</X><Y>-20</Y></Label>
+					<Label><X>5</X><Y>-30</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
@@ -12419,7 +12509,7 @@ if (compareDestination(agent)){
 					<Id>1626423697515</Id>
 					<Name><![CDATA[moveTo7]]></Name>
 					<X>1220</X><Y>4650</Y>
-					<Label><X>-10</X><Y>-15</Y></Label>
+					<Label><X>-25</X><Y>-30</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
@@ -12584,8 +12674,8 @@ if (compareDestination(agent)){
 				<EmbeddedObject>
 					<Id>1626425181455</Id>
 					<Name><![CDATA[innerType2]]></Name>
-					<X>2460</X><Y>4220</Y>
-					<Label><X>25</X><Y>-20</Y></Label>
+					<X>2390</X><Y>4220</Y>
+					<Label><X>-25</X><Y>-25</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
 					<ShowLabel>true</ShowLabel>
@@ -12671,7 +12761,7 @@ if (compareDestination(agent)){
 				<EmbeddedObject>
 					<Id>1626425232007</Id>
 					<Name><![CDATA[moveTo8]]></Name>
-					<X>2540</X><Y>4350</Y>
+					<X>2380</X><Y>4350</Y>
 					<Label><X>-10</X><Y>-15</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -12834,7 +12924,7 @@ if (compareDestination(agent)){
 				<EmbeddedObject>
 					<Id>1626425239590</Id>
 					<Name><![CDATA[outTruckSink2]]></Name>
-					<X>2640</X><Y>4360</Y>
+					<X>2460</X><Y>4360</Y>
 					<Label><X>-10</X><Y>-20</Y></Label>
 					<PublicFlag>false</PublicFlag>
 					<PresentationFlag>true</PresentationFlag>
@@ -78838,6 +78928,18 @@ while(it.hasNext()){
 						</InitialValue>
 					</Properties>
 				</Variable>
+				<Variable Class="PlainVariable">
+					<Id>1633499205497</Id>
+					<Name><![CDATA[currentLocation]]></Name>
+					<X>450</X><Y>80</Y>
+					<Label><X>10</X><Y>0</Y></Label>
+					<PublicFlag>false</PublicFlag>
+					<PresentationFlag>true</PresentationFlag>
+					<ShowLabel>true</ShowLabel>
+					<Properties SaveInSnapshot="true" Constant="false" AccessType="public" StaticVariable="false">
+						<Type><![CDATA[Location]]></Type>        
+					</Properties>
+				</Variable>
 				<Variable Class="Parameter">
 					<Id>1604127118455</Id>
 					<Name><![CDATA[size]]></Name>
@@ -79619,7 +79721,7 @@ false: drop]]></Description>
 		<Height>3880</Height>
 	</Frame>
 	<Database>
-		<Logging>true</Logging>
+		<Logging>false</Logging>
 		<AutoExport>false</AutoExport>
 		<ShutdownCompact>false</ShutdownCompact>
 		<ImportSettings>
@@ -79792,254 +79894,338 @@ engine.stop();]]></Code>
 			<Name><![CDATA[Yard]]></Name>
 			<Text><![CDATA[/**
  * Yard
- */	
-public class Yard extends Location implements Serializable {
+ */
 
-	public static String type = "Yard: ";
-	public String[] idList;
-	public boolean ifSpecialYard = false;
-	public String id;
-	
-	// yard configuration
-	public int bayAmount;
-	public int stackAmount;
-	public int layerLimit;
-	public int[] doublePileBayIndex = {0,1};
-	
-	// yard type 
-	public boolean isExport; // import yard block if false
-	
-	//public Road road; // operation road
-	
-	public Path path; // operation path
-	public int pathYOffset; // offset from target point Y to operate bay Y
-	
-	//public StopLine enterStopline;
-	public Node enterNode;
-	
-	// trucks waiting in the queue
-	public LinkedList<Truck> queuingTrucks = new LinkedList<Truck>();
-	
-	// truck that is coming to this yard , not include the trucks in the queue
-	public LinkedList<Truck> headingTrucks = new LinkedList<Truck>();
+public
+class Yard extends Location implements Serializable
+{
 
-	
-	public int capacity; // total containers amount limit
-	public int reservedAmount = 0; // exist container amount + reserved amount
-	public TreeMap<TwoDPoint, Pile> block = new TreeMap<TwoDPoint, Pile>();
-	
-	public OverheadCrane crane;
-	public RectangularNode blockArea;
-	
-	// relocate rate (for retrieve containers)
-	public int targetOperationAmount = 0;
-	public int relocationAmount = 0;
-	
-	// move to the upper class
-	//public LinkedList<Task> currentTaskList = new LinkedList<Task>();
-	public boolean craneBusy = false;
-	
-	public int craneBayPosition = 0; // crane's current bay
-	
-	// for data vistualization export
-	public int exportAmountInTimeInterval = 0;
-	public int inportAmountInTimeInterval = 0;
-	
-	public int index;
-	public Random R;
-	public boolean fixRandom;
-	public Yard(int index, int bayAmount, int stackAmount, int layerLimit, Random R, boolean fixRandom) {
-		super(type, index);
-		this.index = index;
-		this.bayAmount = bayAmount;
-		this.stackAmount = stackAmount;
-		this.layerLimit = layerLimit;
-		this.capacity = (layerLimit-1)*bayAmount*stackAmount; 
-		this.fixRandom = fixRandom;
-		this.R = R;
-		
-		// init yard block
-		for (int bay=0;bay<bayAmount;bay++) {
-			for (int stack=0;stack<stackAmount;stack++) {
-				Pile pile = new Pile(false);
-				Stack<Container> containers = new Stack<Container>();
-				pile.containerPiles.add(containers);
-				block.put(new TwoDPoint(bay, stack), pile);
-			}
-		}
-		
-		
-		// select two random bay as 20-size containers bay
-		// 0, 1
-		
-		int doublePileBayAmount = 2;
-		for (int i=0; i<doublePileBayAmount; i++) {
-			int bay = i;
-			for (int stack=0; stack<stackAmount; stack++) {
-				Pile pile = block.get(new TwoDPoint(bay, stack));
-				Stack<Container> containers2 = new Stack<Container>();
-				pile.containerPiles.add(containers2);
-				pile.isDoublePile = true;
-			}
-		}
-		
-		
-		// set the bay with two piles storing 20 containers
-		setDoublePileBay(doublePileBayIndex);
+public
+    static String type = "Yard: ";
+public
+    String[] idList;
+public
+    boolean ifSpecialYard = false;
+public
+    String id;
 
-		
-	}
-	
-	
-	public void setDoublePileBay(int []doublePileBayList) {
-		for(int bayIndex: doublePileBayList) {
-			for (int stack=0; stack<stackAmount; stack++) {
-				Pile pile = block.get(new TwoDPoint(bayIndex, stack));
-				Stack<Container> containers2 = new Stack<Container>();
-				pile.containerPiles.add(containers2);
-				pile.isDoublePile = true;
-			}
-		}
-	}
-	
-	
-	public void addAttributes(boolean isExport , Path path, Node enterNode, RectangularNode blockArea, OverheadCrane crane,
-			boolean ifSpecialYard, String id, String[] idList, int pathYOffset) {
-		this.isExport = isExport;
-		this.path = path;
-		this.enterNode = enterNode;
-		this.blockArea = blockArea;
-		this.crane = crane;
-		this.ifSpecialYard = ifSpecialYard;
-		this.id = id;
-		this.idList = idList;
-		this.pathYOffset = pathYOffset;
-	}
-	
-	// used to store a relocated position 
-	public int relocatedBay;
-	public int relocatedStack;
-	public int relocatedLayer;
-	
-	// return the top container in a pile (the contaier to be relocated)
-	// same bay relocation
-	public Container relocate(Container c) {
-			
-		if (c.size == 40) {
-			int newStack;
-			while(true) {
-				int temp = fixRandom ? R.nextInt(this.stackAmount) : new Random().nextInt(this.stackAmount);
-				
-				Stack<Container> pile = (block.get(new TwoDPoint(c.bay, temp))).containerPiles.get(0);
-				if ((temp != c.stack) && (pile.size() < this.layerLimit+1)) {
-					newStack = temp;
-					break;
-				}
-			}	
-			
-			// relocating
-			Container top = block.get(new TwoDPoint(c.bay, c.stack)).containerPiles.get(0).pop();
-			
-			
-			TwoDPoint newPoint = new TwoDPoint(c.bay, newStack);
-			block.get(newPoint).containerPiles.get(0).push(top);
-			
-			// update the position of top
-			top.stack = newStack;
-			top.layer = block.get(newPoint).containerPiles.get(0).size() - 1;
-			
-			relocatedBay = c.bay;
-			relocatedStack = top.stack;
-			relocatedLayer = top.layer;
-			
-			// target container is the container to be moved to the truck
-			// this reference is assigned to each relocated container 
-			top.targetContainer = c;
-			
-			return top;
-			
-		} else {
-			// 20 size containers
-			int newStack;
-			while(true) {
-				int temp = fixRandom ? R.nextInt(this.stackAmount) : new Random().nextInt(this.stackAmount);
-				Stack<Container> tempPile = block.get(new TwoDPoint(c.bay, temp)).containerPiles.get(c.pile0or1);
-				if((temp!=c.stack)&& (tempPile.size() < this.layerLimit+1)) {
-					newStack = temp;
-					break;
-				}
-			}
-			
-			Stack<Container> pile = block.get(new TwoDPoint(c.bay, c.stack)).containerPiles.get(c.pile0or1);
-			
-			// relocating
-			Container top = pile.pop();
-			TwoDPoint newPoint = new TwoDPoint(c.bay, newStack);
-			block.get(newPoint).containerPiles.get(c.pile0or1).push(top);
-			
-			/*
-			// debug 
-			//top's initial position
-			System.out.println("Relocate:");
-			System.out.println("Pile0or1: "+top.pile0or1);
-			System.out.println(top.bay+" "+top.stack+" "+ top.layer);
-			System.out.println();
-			*/
-			
-			
-			// update the position of top
-			top.stack = newStack;
-			top.layer = block.get(newPoint).containerPiles.get(top.pile0or1).size() - 1;
-			
-			relocatedBay = c.bay;
-			relocatedStack = top.stack;
-			relocatedLayer = top.layer;
-			
-			// target container is the container to be moved to the truck
-			// this reference is assigned to each relocated container 
-			top.targetContainer = c;
-			
-			return top;
-		}
-	}
-	
-	public void showDoublePileInfo() {
-		System.out.println(this.name+"------------------------------");
-		for (int bay =0;bay<bayAmount;bay++) {
-			for (int stack=0;stack<stackAmount;stack++) {
-				Pile pile = block.get(new TwoDPoint(bay,stack));
-				if (pile.isDoublePile) {
-					pile.showInfo();
-				}
-			}
-		}
-	}
-	
-	public void showBlockConfiguration() {
-		// show containers in block
-		Set<TwoDPoint> keys =  block.keySet();
-		Iterator<TwoDPoint> it = keys.iterator();
-		System.out.println("Yard: " + this.index + " Block Configuration");
-		System.out.println("Reserved Amount: " + this.reservedAmount);
-		while(it.hasNext()) {
-			TwoDPoint key = it.next();
-			System.out.print("Bay: "+ key.x + " Stack: "+ key.y + " Amount: " + block.get(key).containerPiles.get(0).size());
-			System.out.println();
-		}
-	}
-	
+    // yard configuration
+public
+    int bayAmount;
+public
+    int stackAmount;
+public
+    int layerLimit;
+public
+    int[] doublePileBayIndex = {0, 1};
 
-	@Override
-	public String toString() {
-		return super.toString();
-	}
+    // yard type
+public
+    boolean isExport; // import yard block if false
 
-	/**
-	 * 这个数字在这里是出于模型快照存储的目的<br>
-	 * 当这个类改变时需要改变它
-	 */ 
-	private static final long serialVersionUID = 1L;
+    // public Road road; // operation road
 
+public
+    Path path; // operation path
+public
+    int pathYOffset; // offset from target point Y to operate bay Y
+
+    // public StopLine enterStopline;
+public
+    Node enterNode;
+
+    // trucks waiting in the queue
+public
+    LinkedList<Truck> queuingTrucks = new LinkedList<Truck>();
+
+    // truck that is coming to this yard , not include the trucks in the queue
+public
+    LinkedList<Truck> headingTrucks = new LinkedList<Truck>();
+
+public
+    int capacity; // total containers amount limit
+public
+    int reservedAmount = 0; // exist container amount + reserved amount
+public
+    TreeMap<TwoDPoint, Pile> block = new TreeMap<TwoDPoint, Pile>();
+
+public
+    OverheadCrane crane;
+public
+    RectangularNode blockArea;
+
+    // relocate rate (for retrieve containers)
+public
+    int targetOperationAmount = 0;
+public
+    int relocationAmount = 0;
+
+    // move to the upper class
+    // public LinkedList<Task> currentTaskList = new LinkedList<Task>();
+public
+    boolean craneBusy = false;
+public
+    boolean acceptable = true;
+
+public
+    int craneBayPosition = 0; // crane's current bay
+
+    // for data vistualization export
+public
+    int exportAmountInTimeInterval = 0;
+public
+    int inportAmountInTimeInterval = 0;
+
+public
+    int index;
+public
+    Random R;
+public
+    boolean fixRandom;
+public
+    Yard(int index, int bayAmount, int stackAmount, int layerLimit, Random R, boolean fixRandom)
+    {
+        super(type, index);
+        this.index = index;
+        this.bayAmount = bayAmount;
+        this.stackAmount = stackAmount;
+        this.layerLimit = layerLimit;
+        this.capacity = (layerLimit - 1) * bayAmount * stackAmount;
+        this.fixRandom = fixRandom;
+        this.R = R;
+
+        // init yard block
+        for (int bay = 0; bay < bayAmount; bay++)
+        {
+            for (int stack = 0; stack < stackAmount; stack++)
+            {
+                Pile pile = new Pile(false);
+                Stack<Container> containers = new Stack<Container>();
+                pile.containerPiles.add(containers);
+                block.put(new TwoDPoint(bay, stack), pile);
+            }
+        }
+
+        // select two random bay as 20-size containers bay
+        // 0, 1
+
+        int doublePileBayAmount = 2;
+        for (int i = 0; i < doublePileBayAmount; i++)
+        {
+            int bay = i;
+            for (int stack = 0; stack < stackAmount; stack++)
+            {
+                Pile pile = block.get(new TwoDPoint(bay, stack));
+                Stack<Container> containers2 = new Stack<Container>();
+                pile.containerPiles.add(containers2);
+                pile.isDoublePile = true;
+            }
+        }
+
+        // set the bay with two piles storing 20 containers
+        setDoublePileBay(doublePileBayIndex);
+    }
+
+public
+    void setDoublePileBay(int[] doublePileBayList)
+    {
+        for (int bayIndex : doublePileBayList)
+        {
+            for (int stack = 0; stack < stackAmount; stack++)
+            {
+                Pile pile = block.get(new TwoDPoint(bayIndex, stack));
+                Stack<Container> containers2 = new Stack<Container>();
+                pile.containerPiles.add(containers2);
+                pile.isDoublePile = true;
+            }
+        }
+    }
+
+public
+    void addAttributes(boolean isExport, Path path, Node enterNode, RectangularNode blockArea, OverheadCrane crane,
+                       boolean ifSpecialYard, String id, String[] idList, int pathYOffset)
+    {
+        this.isExport = isExport;
+        this.path = path;
+        this.enterNode = enterNode;
+        this.blockArea = blockArea;
+        this.crane = crane;
+        this.ifSpecialYard = ifSpecialYard;
+        this.id = id;
+        this.idList = idList;
+        this.pathYOffset = pathYOffset;
+    }
+
+    // used to store a relocated position
+public
+    int relocatedBay;
+public
+    int relocatedStack;
+public
+    int relocatedLayer;
+
+    // return the top container in a pile (the contaier to be relocated)
+    // same bay relocation
+    // temp is the targeting location of relocating ,c is the container to be load, top is the container to be relocated
+public
+    Container relocate(Container c, int n)
+    {
+
+        if (c.size == 40)
+        {
+            int newStack;
+            while (true)
+            {	
+            	System.out.println("loop");
+                // int temp = fixRandom ? R.nextInt(this.stackAmount) : new Random().nextInt(this.stackAmount);
+                // int temp=env.getStack();
+                int temp = n;
+                // int temp = env.getRandomAction(state, fixRandom, R);
+                Stack<Container> pile = (block.get(new TwoDPoint(c.bay, temp))).containerPiles.get(0);
+
+                //System.out.println("layer limit is "+this.layerLimit);
+                //laterLimit ==6 
+                if ((temp != c.stack) && (pile.size() < this.layerLimit + 1))
+                {
+                    newStack = temp;
+                    //System.out.println("break!!");
+                    break;
+                }
+            }
+
+            // relocating
+            Container top = block.get(new TwoDPoint(c.bay, c.stack)).containerPiles.get(0).pop();
+
+            TwoDPoint newPoint = new TwoDPoint(c.bay, newStack);
+            block.get(newPoint).containerPiles.get(0).push(top);
+
+            // update the position of top
+            top.stack = newStack;
+            top.layer = block.get(newPoint).containerPiles.get(0).size() - 1;
+
+            relocatedBay = c.bay;
+            relocatedStack = top.stack;
+            relocatedLayer = top.layer;
+
+            //System.out.println("bay " + relocatedBay + " ;stack " + relocatedStack + " ;layer" + relocatedLayer);
+
+            // target container is the container to be moved to the truck
+            // this reference is assigned to each relocated container
+            top.targetContainer = c;
+
+            return top;
+        }
+        else
+        {
+            // 20 size containers
+            int newStack;
+            while (true)
+            {
+                int temp = fixRandom ? R.nextInt(this.stackAmount) : new Random().nextInt(this.stackAmount);
+                Stack<Container> tempPile = block.get(new TwoDPoint(c.bay, temp)).containerPiles.get(c.pile0or1);
+                if ((temp != c.stack) && (tempPile.size() < this.layerLimit + 1))
+                {
+                    newStack = temp;
+                    break;
+                }
+            }
+
+            Stack<Container> pile = block.get(new TwoDPoint(c.bay, c.stack)).containerPiles.get(c.pile0or1);
+
+            // relocating
+            Container top = pile.pop();
+            TwoDPoint newPoint = new TwoDPoint(c.bay, newStack);
+            block.get(newPoint).containerPiles.get(c.pile0or1).push(top);
+
+            /*
+            // debug
+            //top's initial position
+            System.out.println("Relocate:");
+            System.out.println("Pile0or1: "+top.pile0or1);
+            System.out.println(top.bay+" "+top.stack+" "+ top.layer);
+            System.out.println();
+            */
+
+            // update the position of top
+            top.stack = newStack;
+            top.layer = block.get(newPoint).containerPiles.get(top.pile0or1).size() - 1;
+
+            relocatedBay = c.bay;
+            relocatedStack = top.stack;
+            relocatedLayer = top.layer;
+
+            // target container is the container to be moved to the truck
+            // this reference is assigned to each relocated container
+            top.targetContainer = c;
+
+            return top;
+        }
+    }
+
+public
+    void showDoublePileInfo()
+    {
+        System.out.println(this.name + "------------------------------");
+        for (int bay = 0; bay < bayAmount; bay++)
+        {
+            for (int stack = 0; stack < stackAmount; stack++)
+            {
+                Pile pile = block.get(new TwoDPoint(bay, stack));
+                if (pile.isDoublePile)
+                {
+                    pile.showInfo();
+                }
+            }
+        }
+    }
+
+public
+    String getContainersMatrix()
+    {
+        StringBuffer sb = new StringBuffer("");
+        Set<TwoDPoint> keys = block.keySet();
+        Iterator<TwoDPoint> it = keys.iterator();
+        int i=0;
+        while (it.hasNext())
+        {
+        	
+            TwoDPoint key = it.next();
+            String s = String.valueOf(block.get(key).containerPiles.get(0).size());
+            sb.append(s);
+            i+=1;
+        }
+        //System.out.println(sb);
+
+        return sb.toString();
+    }
+
+public
+    void showBlockConfiguration()
+    {
+        // show containers in block
+        Set<TwoDPoint> keys = block.keySet();
+        Iterator<TwoDPoint> it = keys.iterator();
+        //System.out.println("Yard: " + this.index + " Block Configuration");
+        //System.out.println("Reserved Amount: " + this.reservedAmount);
+        while (it.hasNext())
+        {
+            TwoDPoint key = it.next();
+            //System.out.print("Bay: " + key.x + " Stack: " + key.y + " Amount: " + block.get(key).containerPiles.get(0).size());
+            //System.out.println();
+        }
+    }
+
+    @Override public String toString()
+    {
+        return super.toString();
+    }
+
+    /**
+     * 这个数字在这里是出于模型快照存储的目的<br>
+     * 当这个类改变时需要改变它
+     */
+private
+    static final long serialVersionUID = 1L;
 }]]></Text>
 		</JavaClass>
 		<!--   =========   Java Class   ========  -->
@@ -80420,9 +80606,9 @@ public class Init implements Serializable {
 	public Random R;
 	public String innerTaskFileName ="../Data/innerContainer.txt";
 	//public String outTaskFileName = "../Data/empty.txt";
-	public String outTaskFileName = "../Data/outerContainerOut1.txt";
-	public String inTaskFileName = "../Data/empty.txt";
-	//public String inTaskFileName = "../Data/outerContainerIn.txt";
+	public String outTaskFileName = "../Data/outerContainerOut.txt";
+	//public String inTaskFileName = "../Data/empty.txt";
+	public String inTaskFileName = "../Data/outerContainerIn.txt";
 	//To do: check total amount avalibility 
 	
 	public Init(ArrayList<Berth> berthes, ArrayList<Yard> yards, String taskFileName, boolean fixRandom, Random R) {
@@ -81582,7 +81768,7 @@ public class State implements Serializable {
 	double[] truckToTargetQCDistance; 
 	int yardQueueLength;
 	int headingToYardAmount; // truck that is coming to this yard amount, not include the trucks in the queue
- 	
+
 	
 	public State(ArrayList<Truck> trucks, ArrayList<QueyCrane> queyCranes, ArrayList<Double> taskOperationTimes, int[][] matrix, int shipAmount) {
 		this.trucks = trucks;
@@ -81621,6 +81807,7 @@ public class State implements Serializable {
 		return truckCurrentPositionIndex;
 	}
 	
+
 	public void updateTruckDispatchingState(Truck t, Network net) {
 		int truckCurrentPositionIndex = getTruckCurrentPositionIndex(t);
 		
@@ -81696,7 +81883,7 @@ public class State implements Serializable {
 				System.out.println("no null");
 			}
 			*/
-			taskPriority[truck] = targetQC.currentTaskList.indexOf(t.task);
+			//taskPriority[truck] = targetQC.currentTaskList.indexOf(t.task);
 			
 			if (taskPriority[truck] == -1) {
 				System.out.println("QC task list fail to contain task");
@@ -81705,7 +81892,7 @@ public class State implements Serializable {
 			
 			
 			// distance to target QC
-			truckToTargetQCDistance[truck] = matrix[ getTruckCurrentPositionIndex(t) ][ targetQC.index ];
+			//truckToTargetQCDistance[truck] = matrix[ getTruckCurrentPositionIndex(t) ][ targetQC.index ];
 		}
 		
 		
@@ -81839,6 +82026,147 @@ public class Action implements Serializable {
 	public boolean isCraneScheduleAction;
 	
 	
+	private static final long serialVersionUID = 1L;
+
+}]]></Text>
+		</JavaClass>
+		<!--   =========   Java Class   ========  -->
+		<JavaClass>
+			<Id>1647240428229</Id>
+			<Name><![CDATA[Observation]]></Name>
+			<Text><![CDATA[/**
+ * Observation
+ */	
+public class Observation implements Serializable {
+	//public int portNum;
+	//public boolean isDone = false;
+	public int stack;
+	public int bay;
+	public Yard yard;
+	//public int relocationTime;
+	public String containersMatrix;
+	public int headingTrucksNumber;
+	public int queuingTrucksNumber;
+	
+	// find the tasks which related to the yard
+	public LinkedList<Truck> headingTrucks;
+	public LinkedList<Truck> queuingTrucks;
+	
+	//used to transfer future containers by using 5 digits string 
+	//1 digit container type(2 for small,4 for big,2 digits bay, 1 digit stack, 1 digit layer
+	public StringBuffer headingContainers; 
+	public StringBuffer queuingContainers;
+	public TreeMap<TwoDPoint, Pile> block; 
+ 	public int taskNumber;
+ 	public int relocationNumber;
+
+    /**
+     * Default constructor
+     */
+    public Observation(Container c, int relocationNumber,int taskNumber) {
+    	this.yard= (Yard)c.currentLocation;
+    	this.block=yard.block;
+    	this.stack=c.stack;
+    	this.bay=c.bay;
+    	//headingTrucks=yard.headingTrucks;
+    	//relocationTime=t;
+    	this.containersMatrix=yard.getContainersMatrix();
+    	this.headingTrucks=yard.headingTrucks;
+    	this.queuingTrucks=yard.queuingTrucks;
+    	this.headingTrucksNumber=headingTrucks.size();
+    	this.queuingTrucksNumber=queuingTrucks.size();
+    	this.taskNumber=taskNumber;
+		this.relocationNumber=relocationNumber;
+		//System.out.println("taskNumber: "+taskNumber+";relocationNumber: "+relocationNumber);
+    	
+    	
+    	headingContainers=new StringBuffer("");
+    	queuingContainers=new StringBuffer("");
+    	for(Truck truck:headingTrucks) {
+    		Task task=truck.task;
+    		headingContainers=container2String(headingContainers,task);
+    	}
+    	for(Truck truck:queuingTrucks) {
+    		Task task=truck.task;
+    		queuingContainers=container2String(queuingContainers,task);
+    	}
+    	//System.out.println("headingcontainers: "+headingContainers);
+    	//System.out.println("queuingcontainers: "+queuingContainers);
+    	
+    }
+    
+	
+	
+    
+    private StringBuffer container2String(StringBuffer sb,Task task) {
+    	boolean isSmallContainer;
+    	if(task.container2==null) {
+    		isSmallContainer=false;
+    		
+		}else {
+			isSmallContainer=true;
+		}
+		//System.out.println("hello");
+		if (task.source instanceof Yard){
+			Yard source2yard=(Yard)task.source;
+			if(source2yard.index==yard.index) {
+				//System.out.println("source the same yard");
+				if(isSmallContainer) {
+					sb.append("2");
+				}else {
+					sb.append("4");
+				}
+				int b=task.container.bay;
+				int s=task.container.stack;
+				int l=task.container.layer;
+				//headingContainer
+
+				if(b<10) {
+					sb.append("0");
+				}
+				sb.append(String.valueOf(b));
+				sb.append(String.valueOf(s));
+				sb.append(String.valueOf(l));
+				//System.out.println("isSmallContainer: "+isSmallContainer+";b: "+b+";s: "+s+";l: "+l);
+			}
+		}
+		
+		
+		if(task.source2 instanceof Yard) {
+			
+			Yard source22yard=(Yard)task.source2;
+			if(source22yard.index==yard.index) {
+				if(isSmallContainer) {
+					sb.append("2");
+				}else {
+					sb.append("4");
+				}
+				int b=task.container2.bay;
+				int s=task.container2.stack;
+				int l=task.container2.layer;
+				//headingContainer
+
+				if(b<10) {
+					sb.append("0");
+				}
+				sb.append(String.valueOf(b));
+				sb.append(String.valueOf(s));
+				sb.append(String.valueOf(l));
+			}
+		}
+		
+    	return sb;
+    }
+
+	@Override
+	public String toString() {
+		return super.toString();
+	}
+
+	/**
+	 * This number is here for model snapshot storing purpose<br>
+	 * It needs to be changed when this class gets changed
+	 */ 
 	private static final long serialVersionUID = 1L;
 
 }]]></Text>

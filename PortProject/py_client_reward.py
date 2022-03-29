@@ -53,8 +53,9 @@ class YardEnv(gym.Env):
     episode_list = []
     last100relocationNumbers = np.zeros(100)
     last100Rewards = np.zeros(100)
+    gloval_relocation_list=[]
 
-    def __init__(self, n_actions, port, env_type):
+    def __init__(self, n_actions, port, env_type,global_relocation_list=[]):
         super(YardEnv, self).__init__()
         self.client = None
         # print("ini port is ",port)
@@ -65,7 +66,7 @@ class YardEnv(gym.Env):
         self.env_type = env_type
         self.root_path = os.getcwd()
         self.executor = self.start_java_end()
-
+        self.gloval_relocation_list=global_relocation_list
         self.action_space = spaces.Discrete(6)
         # Example for using image as input (channel-first; channel-last also works):
 
@@ -126,7 +127,6 @@ class YardEnv(gym.Env):
         results = []
         filter = ['.jar']
         for maindir, subdir, files in os.walk(path):
-
             for f in files:
                 apath = os.path.join(maindir, f)
                 ext = os.path.splitext(apath)
@@ -161,8 +161,12 @@ class YardEnv(gym.Env):
         queuingContainers = info.get("queuingContainers")
         taskNumber = info.get("taskNumber")
         relocationNumber = info.get("relocationNumber")
-        reward = info.get('reward')
+        # reward = info.get('reward')
+
+        containerRelocationNumber=info.get("containerRelocationNumber")
         is_done = info.get('isDone')
+        # print("containerRelocationNumber",containerRelocationNumber)
+
         if show_info:
             print("reset****")
             print("bay: ", type(bay), " : ", bay)
@@ -173,7 +177,7 @@ class YardEnv(gym.Env):
             print("headingContainers: ", type(headingContainers), " : ", headingContainers)
             print("queuingContainers: ", type(queuingContainers), " : ", queuingContainers)
             print("relocationNumber/taskNumber: ", float(relocationNumber) / float(taskNumber))
-            print("reward: ", type(reward), " : ", reward)
+            # print("reward: ", type(reward), " : ", reward)
             print("is_done: ", type(is_done), " : ", is_done)
         headingContainers = self.regulateStrings(headingContainers)
         queuingContainers = self.regulateStrings(queuingContainers)
@@ -251,14 +255,14 @@ class YardEnv(gym.Env):
 
         if action == self.observation.stack:
             # print("not move")
-            r-=20
+            r-=5
 
 
 
         # check the layer of new position
         # reward+=4-layer
         pileSize = int(self.observation.containersMatrix[self.observation.bay * 6 + action])
-        r -= pileSize
+        r = 0.5-1.0/6.0*pileSize
         # print("pile$",r)
 
         # check whether the new position will be the reshuffled in near future
@@ -270,13 +274,13 @@ class YardEnv(gym.Env):
         # print("heading bay",self.observation.headingContainers[1:3]," ",self.observation.headingContainers[6:8],", bay ",bay)
         # print("head stack",self.observation.headingContainers[3]," ",self.observation.headingContainers[8],", action ",action)
         if(int(self.observation.queuingContainers[1:3])==bay and self.observation.queuingContainers[3]==action) or (int(self.observation.queuingContainers[6:8])==bay and self.observation.queuingContainers[8]==action):
-            r-=10
+            r-=3
             # print("queue $")
 
 
         if (int(self.observation.headingContainers[1:3]) == bay and self.observation.headingContainers[3] == action) or (
                 int(self.observation.headingContainers[1:3]) == bay and self.observation.headingContainers[8] == action):
-            r -= 8
+            r -= 4
             # print("head $")
 
         # print("current $",r)
@@ -316,10 +320,12 @@ class YardEnv(gym.Env):
         queuingContainers = info.get("queuingContainers")
         taskNumber = info.get("taskNumber")
         relocationNumber = info.get("relocationNumber")
+        containerRelocationNumber=info.get("containerRelocationNumber")
 
         # reward = info.get('reward')
         is_done = info.get('isDone')
         reward += self.calculateReward(action,bay)
+
 
         if not is_done:
             headingContainers = self.regulateStrings(headingContainers)
@@ -335,15 +341,23 @@ class YardEnv(gym.Env):
                 print("queuingContainers: ", type(queuingContainers), " : ", queuingContainers)
                 print("relocationNumber: ", relocationNumber, " taskNumber: ", taskNumber)
                 print(" relocationNumber/taskNumber: ", float(relocationNumber) / float(taskNumber))
+                if (containerRelocationNumber > 0):
+                    print("containerRelocationNumber", containerRelocationNumber)
                 print("is_done: ", type(is_done), " : ", is_done)
-            reward -= ( float(relocationNumber) / float(taskNumber) + 0.07) * 100
+            # reward -= ( float(relocationNumber) / float(taskNumber) + 0.07) * 100
+
+            reward-=containerRelocationNumber*0.5
+            # print("reward ",reward)
             obs = Observation(bay, stack, containersMatrix, headingTrucksNumber, queuingTrucksNumber, headingContainers,
                               queuingContainers, relocationNumber)
             self.observation = obs
             s_ = self.getState(obs)
             return s_, reward, is_done, {"validAction": True}
         else:
-            if self.env_type == "test":
+            print("port ",self.port,": episode ",self.count," end, relocation: ",self.observation.relocationNumber)
+            self.count+=1
+            self.gloval_relocation_list.append(self.observation.relocationNumber)
+            if(self.env_type=="test"):
                 self.relocation_list.append(self.observation.relocationNumber)
             return np.zeros(30).astype(np.uint8), -1, is_done, {"validAction": True}
 

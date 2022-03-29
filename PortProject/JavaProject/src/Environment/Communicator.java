@@ -65,7 +65,7 @@ public class Communicator {
 		json.put("queuingTrucksNumber", observation.queuingTrucksNumber);
 		json.put("headingContainers", observation.headingContainers);
 		json.put("queuingContainers", observation.queuingContainers);
-
+		json.put("containerRelocationNumber", observation.containerRelocationNumber);
 		json.put("taskNumber", observation.taskNumber);
 		json.put("relocationNumber", observation.relocationNumber);
 //		System.out.println("**********");

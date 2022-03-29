@@ -178,6 +178,12 @@
 
 
 
+## Training and testing environment
+
+
+
+
+
 # reward
 
 - [ ] 根据relocationNumber来计算reward
@@ -205,6 +211,8 @@
 - exploration
   - add noise
   - use big discount factor
+
+
 
 
 

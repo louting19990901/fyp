@@ -35,7 +35,7 @@ public class Env {
 	public static String yardCraneSchedulePolicy = "FCFS"; // ORDERED, FCFS, GREEDY, RANDOM,
 	public static HashMap<Integer, Communicator> com = new HashMap<Integer, Communicator>(); // <port_number, socket>
 
-	public static boolean fixRandom = false;
+	public static boolean fixRandom = true;
 	public static int seed = 666666;
 
 	public static boolean optimizeMode = false;
@@ -152,7 +152,7 @@ public class Env {
 						.get(0);
 
 				if (action != observation.stack && (pile.size() < 6 + 1)) {
-					System.out.println("relo action is " + action);
+//					System.out.println("relo action is " + action);
 					return action;
 				} else {
 					action = new Random().nextInt(6);

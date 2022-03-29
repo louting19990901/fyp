@@ -50,7 +50,7 @@ if __name__ == '__main__':
     # You can choose between `DummyVecEnv` (usually faster) and `SubprocVecEnv`
     # env = make_vec_env(env_id, n_envs=num_cpu, seed=0, vec_env_cls=SubprocVecEnv)
 
-    eval_env = YardEnv(16, 20, 'test')
+    eval_env = YardEnv(16, 50, 'test')
     episode = 10000
     total_task_number = 200
 
