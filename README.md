@@ -143,7 +143,7 @@
 - 在yard的情境下，由于在一个episode中任务数量是不变的，因此一下参数可以作为reward shaping的额外reward
   - reshuffleNumber/taskNumber
 - 给机器加上好奇心：碰到新事物可以增加reward
-- action mask? 给不合理动作一个巨大的负值
+- 对比 action mask 和自创的返回重新选择
 - 
 
 

@@ -1,6 +1,6 @@
 import gym
 # from py_client_sb import YardEnv
-from py_client_reward import YardEnv
+from py_client_add import YardEnv
 from stable_baselines3 import PPO
 from stable_baselines3.common.env_util import make_vec_env
 import time
@@ -9,14 +9,11 @@ import matplotlib.pyplot as plt
 # %matplotlib inline
 from stable_baselines3.common.evaluation import evaluate_policy
 import gym
-
 from stable_baselines3.common.vec_env import DummyVecEnv, SubprocVecEnv
 from stable_baselines3.common.utils import set_random_seed
 from stable_baselines3 import PPO, A2C,DQN
-
 import gym
 import numpy as np
-
 from stable_baselines3 import PPO
 from stable_baselines3.common.vec_env import DummyVecEnv, SubprocVecEnv
 from stable_baselines3.common.env_util import make_vec_env
@@ -25,6 +22,7 @@ import os
 os.environ["KMP_DUPLICATE_LIB_OK"]="TRUE"
 
 global_relocation_list=[]
+test_relocation_list=[]
 
 def make_env(env_id, rank, seed=0):
     """
@@ -51,12 +49,14 @@ def getMean(arr):
 if __name__ == '__main__':
     # env_id = "CartPole-v1"
     num_cpu = 4  # Number of processes to use
-    # eval_env = YardEnv(16, 50, 'test')
-    episode = 1
+    episode = 10000
     total_task_number = 200
 
 
-    env = SubprocVecEnv([make_env(i + 20, i + 20) for i in range(num_cpu)])
+    # envs=[make_env(i + 20, i + 20) for i in range(num_cpu)]
+
+    env=YardEnv(16,28,'train',global_relocation_list)
+    # env = SubprocVecEnv(envs)
     model = PPO('MlpPolicy', env, verbose=1,tensorboard_log="./yard_tensorboard/")
 
     tic = time.time()
@@ -64,10 +64,16 @@ if __name__ == '__main__':
     toc = time.time()
     due = toc - tic
     print(num_cpu," core take ",due)
+
+
+    # print(global_relocation_list)
+    # eval_env = YardEnv(16, 50, 'test',test_relocation_list)
     # mean_reward, std_reward = evaluate_policy(model, eval_env, n_eval_episodes=1)
     # print(f"mean_reward:{mean_reward:.2f} +/- {std_reward:.2f}")
 
-    print(getMean(global_relocation_list))
+    print("total mean ",getMean(global_relocation_list))
+    print("last 100 mean ",getMean(global_relocation_list[-100:]))
     plt.plot( range(len(global_relocation_list)),global_relocation_list)
     plt.show()
+
 

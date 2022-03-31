@@ -18,7 +18,7 @@ from stable_baselines3 import PPO, A2C  # DQN coming soon
 from stable_baselines3.common.env_util import make_vec_env
 
 show_info = False
-
+total_relocation_list=[[],[],[],[]]
 
 class Observation:  # total 174 bit => total 30
     bay = -1  # 1 bit
@@ -54,7 +54,6 @@ class YardEnv(gym.Env):
     last100relocationNumbers = np.zeros(100)
     last100Rewards = np.zeros(100)
     global_relocation_list=[]
-    additionalRelocation=0
 
     def __init__(self, n_actions, port, env_type,global_relocation_list):
         super(YardEnv, self).__init__()
@@ -301,6 +300,12 @@ class YardEnv(gym.Env):
             else:
                 return self.getState(self.observation), -1000, False, {"validAction": False}
 
+
+
+
+
+
+
         # print("           1111111")
         self.client.send(str(action).encode('GBK'))
         # print("        22222222")
@@ -340,26 +345,20 @@ class YardEnv(gym.Env):
                     print("containerRelocationNumber", containerRelocationNumber)
                 print("is_done: ", type(is_done), " : ", is_done)
             # reward -= ( float(relocationNumber) / float(taskNumber) + 0.07) * 100
-            if(containerRelocationNumber>0):
-                reward-=1
-                self.additionalRelocation+=1
+
+            reward-=containerRelocationNumber*0.5
             # print("reward ",reward)
             obs = Observation(bay, stack, containersMatrix, headingTrucksNumber, queuingTrucksNumber, headingContainers,
                               queuingContainers, relocationNumber)
             self.observation = obs
             s_ = self.getState(obs)
-
             return s_, reward, is_done, {"validAction": True}
         else:
-            # print("port ",self.port,": episode ",self.count," end, additionalRelocation: ",self.observation.relocationNumber)
-            # self.count+=1
-            # self.global_relocation_list.append(self.observation.relocationNumber)
-
-            print("port ",self.port,": episode ",self.count," end, additionalRelocation: ",self.additionalRelocation)
+            print("port ",self.port,": episode ",self.count," end, relocation: ",self.observation.relocationNumber)
             self.count+=1
-            self.global_relocation_list.append(self.additionalRelocation)
-
-            # print(self.global_relocation_list)
+            # self.global_relocation_list.append(self.observation.relocationNumber)
+            total_relocation_list[self.port-20]
+            print(self.global_relocation_list)
             if(self.env_type=="test"):
                 self.relocation_list.append(self.observation.relocationNumber)
             return np.zeros(30).astype(np.uint8), -1, is_done, {"validAction": True}
@@ -402,3 +401,93 @@ class YardEnv(gym.Env):
 #     # when a done signal is encountered
 #     print("Goal reached!", "reward=", reward)
 #     break
+
+import gym
+# from py_client_sb import YardEnv
+from py_client_reward import YardEnv
+from stable_baselines3 import PPO
+from stable_baselines3.common.env_util import make_vec_env
+import time
+import numpy as np
+import matplotlib.pyplot as plt
+# %matplotlib inline
+from stable_baselines3.common.evaluation import evaluate_policy
+import gym
+
+from stable_baselines3.common.vec_env import DummyVecEnv, SubprocVecEnv
+from stable_baselines3.common.utils import set_random_seed
+from stable_baselines3 import PPO, A2C,DQN
+
+import gym
+import numpy as np
+
+from stable_baselines3 import PPO
+from stable_baselines3.common.vec_env import DummyVecEnv, SubprocVecEnv
+from stable_baselines3.common.env_util import make_vec_env
+from stable_baselines3.common.utils import set_random_seed
+import os
+os.environ["KMP_DUPLICATE_LIB_OK"]="TRUE"
+
+global_relocation_list=[]
+
+def make_env(env_id, rank, seed=0):
+    """
+    Utility function for multiprocessed env.
+
+    :param env_id: (str) the environment ID
+    :param num_env: (int) the number of environments you wish to have in subprocesses
+    :param seed: (int) the inital seed for RNG
+    :param rank: (int) index of the subprocess
+    """
+    def _init():
+        env = YardEnv(16,env_id,"train",global_relocation_list)
+        env.seed(seed + rank)
+        return env
+    set_random_seed(seed)
+    return _init
+
+def getMean(arr):
+    sum=0.0
+    for i in arr:
+        sum+=i
+    return float(sum)/float(len(arr))
+
+if __name__ == '__main__':
+    # env_id = "CartPole-v1"
+    num_cpu = 4  # Number of processes to use
+    # eval_env = YardEnv(16, 50, 'test')
+    episode = 1
+    total_task_number = 50
+
+
+    envs=[make_env(i + 20, i + 20) for i in range(num_cpu)]
+
+
+    env = SubprocVecEnv(envs)
+    model = PPO('MlpPolicy', env, verbose=1,tensorboard_log="./yard_tensorboard/")
+
+    tic = time.time()
+    model.learn(total_timesteps=total_task_number*episode)
+    toc = time.time()
+    due = toc - tic
+    print(num_cpu," core take ",due)
+    # mean_reward, std_reward = evaluate_policy(model, eval_env, n_eval_episodes=1)
+    # print(f"mean_reward:{mean_reward:.2f} +/- {std_reward:.2f}")
+
+    # plt.figure(figsize=(8, 8), dpi=80)
+    # plt.figure(1)
+    # ax1 = plt.subplot(221)
+    # ax1.plot(len(envs[0].relocation_list),envs[0].relocation_list, color="r", linestyle="--")
+    # ax2 = plt.subplot(222)
+    # ax2.plot(len(envs[1].relocation_list),envs[1].relocation_list, color="y", linestyle="-")
+    # ax3 = plt.subplot(223)
+    # ax3.plot(len(envs[2].relocation_list),envs[2].relocation_list, color="g", linestyle="-.")
+    # ax4 = plt.subplot(224)
+    # ax4.plot(len(envs[3].relocation_list),envs[3].relocation_list, color="b", linestyle=":")
+
+
+
+    print(global_relocation_list)
+    plt.plot( range(len(global_relocation_list)),global_relocation_list)
+    plt.show()
+

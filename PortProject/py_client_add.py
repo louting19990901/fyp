@@ -346,6 +346,7 @@ class YardEnv(gym.Env):
             # print("reward ",reward)
             obs = Observation(bay, stack, containersMatrix, headingTrucksNumber, queuingTrucksNumber, headingContainers,
                               queuingContainers, relocationNumber)
+
             self.observation = obs
             s_ = self.getState(obs)
 
@@ -358,7 +359,7 @@ class YardEnv(gym.Env):
             print("port ",self.port,": episode ",self.count," end, additionalRelocation: ",self.additionalRelocation)
             self.count+=1
             self.global_relocation_list.append(self.additionalRelocation)
-
+            self.additionalRelocation=0
             # print(self.global_relocation_list)
             if(self.env_type=="test"):
                 self.relocation_list.append(self.observation.relocationNumber)
