@@ -41,6 +41,11 @@ class Observation:  # total 174 bit => total 30
         self.queuingContainers = queuingContainers
         self.relocationNumber = relocationNumber
 
+def getMean(arr):
+    sum=0.0
+    for i in arr:
+        sum+=i
+    return float(sum)/float(len(arr))
 
 class YardEnv(gym.Env):
     """Custom Environment that follows gym interface"""
@@ -55,6 +60,8 @@ class YardEnv(gym.Env):
     last100Rewards = np.zeros(100)
     global_relocation_list=[]
     additionalRelocation=0
+    bestMean=99999
+    bestMeanIndex=-1
 
     def __init__(self, n_actions, port, env_type,global_relocation_list):
         super(YardEnv, self).__init__()
@@ -360,6 +367,12 @@ class YardEnv(gym.Env):
             self.count+=1
             self.global_relocation_list.append(self.additionalRelocation)
             self.additionalRelocation=0
+            cmean=getMean(self.global_relocation_list[-100:])
+
+            if(self.count>=100 and cmean<self.bestMean):
+                self.bestMean=cmean
+                self.bestMeanIndex=self.count
+
             # print(self.global_relocation_list)
             if(self.env_type=="test"):
                 self.relocation_list.append(self.observation.relocationNumber)

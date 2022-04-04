@@ -57,7 +57,7 @@ if __name__ == '__main__':
 
     env=YardEnv(16,28,'train',global_relocation_list)
     # env = SubprocVecEnv(envs)
-    model = PPO('MlpPolicy', env, verbose=1,tensorboard_log="./yard_tensorboard/")
+    model = A2C('MlpPolicy', env, verbose=1,tensorboard_log="./yard_tensorboard/")
 
     tic = time.time()
     model.learn(total_timesteps=total_task_number*episode)
