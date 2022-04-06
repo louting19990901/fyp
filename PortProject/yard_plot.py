@@ -1,6 +1,6 @@
 import gym
 # from py_client_sb import YardEnv
-from py_client_add import YardEnv
+from py_client_v4 import YardEnv
 from stable_baselines3 import PPO
 from stable_baselines3.common.env_util import make_vec_env
 import time
@@ -49,7 +49,7 @@ def getMean(arr):
 if __name__ == '__main__':
     # env_id = "CartPole-v1"
     num_cpu = 4  # Number of processes to use
-    episode = 10000
+    episode = 4000
     total_task_number = 200
 
 
@@ -57,7 +57,8 @@ if __name__ == '__main__':
 
     env=YardEnv(16,28,'train',global_relocation_list)
     # env = SubprocVecEnv(envs)
-    model = A2C('MlpPolicy', env, verbose=1,tensorboard_log="./yard_tensorboard/")
+    model = A2C('MlpPolicy', env, verbose=1,tensorboard_log="./yar"
+                                                            "d_tensorboard/")
 
     tic = time.time()
     model.learn(total_timesteps=total_task_number*episode)
@@ -71,9 +72,13 @@ if __name__ == '__main__':
     # mean_reward, std_reward = evaluate_policy(model, eval_env, n_eval_episodes=1)
     # print(f"mean_reward:{mean_reward:.2f} +/- {std_reward:.2f}")
 
+
+
     print("total mean ",getMean(global_relocation_list))
     print("last 100 mean ",getMean(global_relocation_list[-100:]))
     plt.plot( range(len(global_relocation_list)),global_relocation_list)
     plt.show()
 
+    print("best min index is ",env.bestMeanIndex)
+    print("best min is ",env.bestMean)
 
