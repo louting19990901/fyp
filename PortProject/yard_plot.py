@@ -1,6 +1,6 @@
 import gym
 # from py_client_sb import YardEnv
-from py_client_v4 import YardEnv
+from py_client_v1 import YardEnv
 from stable_baselines3 import PPO
 from stable_baselines3.common.env_util import make_vec_env
 import time
@@ -49,9 +49,8 @@ def getMean(arr):
 if __name__ == '__main__':
     # env_id = "CartPole-v1"
     num_cpu = 4  # Number of processes to use
-    episode = 4000
+    episode = 1
     total_task_number = 200
-
 
     # envs=[make_env(i + 20, i + 20) for i in range(num_cpu)]
 
@@ -75,10 +74,12 @@ if __name__ == '__main__':
 
 
     print("total mean ",getMean(global_relocation_list))
-    print("last 100 mean ",getMean(global_relocation_list[-100:]))
+    print("best min index is ",env.bestMeanIndex)
+    print("best min is ",env.bestMean)
+    print(env.get_parameters())
+    # print("last 100 mean ",getMean(global_relocation_list[-100:]))
     plt.plot( range(len(global_relocation_list)),global_relocation_list)
     plt.show()
 
-    print("best min index is ",env.bestMeanIndex)
-    print("best min is ",env.bestMean)
+
 

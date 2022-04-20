@@ -232,3 +232,14 @@
 https://youtu.be/o_g9JUMw1Occ
 
 https://youtu.be/2-zGCx4iv_k
+
+
+
+
+
+
+
+
+
+1. state encoding
+2. preliminaries
